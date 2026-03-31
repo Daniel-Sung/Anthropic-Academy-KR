@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anthropic Academy 한국어 학습 가이드</title>
+<meta name="description" content="Anthropic Academy의 모든 교육 내용을 한국어로 정리한 학습 사이트. 체크리스트로 학습 진행 관리.">
+<style>
+:root {
+  --primary: #D97757;
+  --primary-dark: #B85C3A;
+  --primary-light: #F0C4B0;
+  --bg: #FAF9F7;
+  --card-bg: #FFFFFF;
+  --text: #1a1a1a;
+  --text-secondary: #555;
+  --text-light: #888;
+  --border: #e8e5e0;
+  --success: #4CAF50;
+  --code-bg: #f5f2ed;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-hover: 0 4px 12px rgba(0,0,0,0.1);
+  --radius: 10px;
+  --path-build: #D97757;
+  --path-work: #5B82C4;
+  --path-personal: #7B68AE;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === HEADER === */
+.site-header {
+  background: linear-gradient(135deg, #D97757 0%, #B85C3A 100%);
+  color: white;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-top h1 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.header-top h1 span { font-weight: 400; opacity: 0.85; font-size: 0.85em; }
+
+.progress-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.progress-bar-container {
+  width: 140px;
+  height: 8px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: white;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.progress-text { font-weight: 600; }
+
+/* === NAV TABS === */
+.nav-tabs {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  gap: 4px;
+}
+
+.nav-tab {
+  padding: 10px 20px;
+  background: rgba(255,255,255,0.12);
+  border: none;
+  color: rgba(255,255,255,0.75);
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.nav-tab:hover { background: rgba(255,255,255,0.2); color: white; }
+.nav-tab.active { background: var(--bg); color: var(--text); font-weight: 600; }
+
+/* === MAIN === */
+.main-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* === PATH HEADER === */
+.path-header {
+  padding: 28px 32px;
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  color: white;
+}
+
+.path-header.build { background: linear-gradient(135deg, var(--path-build), #c4553d); }
+.path-header.work { background: linear-gradient(135deg, var(--path-work), #3a5a9e); }
+.path-header.personal { background: linear-gradient(135deg, var(--path-personal), #5a4a8e); }
+
+.path-header h2 { font-size: 1.5rem; margin-bottom: 6px; }
+.path-header p { opacity: 0.9; font-size: 0.95rem; }
+.path-progress {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+}
+
+.path-progress-bar {
+  flex: 1;
+  max-width: 300px;
+  height: 6px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.path-progress-fill {
+  height: 100%;
+  background: white;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* === SECTION === */
+.section {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+
+.section:hover { box-shadow: var(--shadow-hover); }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+
+.section-header:hover { background: #faf8f5; }
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.section-title .emoji { font-size: 1.3rem; }
+
+.section-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+
+.section-count {
+  background: var(--code-bg);
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.section-count.done { background: #e8f5e9; color: var(--success); }
+
+.chevron {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s;
+  color: var(--text-light);
+}
+
+.section.open .chevron { transform: rotate(180deg); }
+
+.section-body {
+  display: none;
+  padding: 0 20px 20px;
+}
+
+.section.open .section-body { display: block; }
+
+/* === TOPIC === */
+.topic {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.topic-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background 0.15s;
+}
+
+.topic-header:hover { background: #faf8f5; }
+
+.topic.open .topic-header { border-bottom: 1px solid var(--border); }
+
+.topic-body {
+  display: none;
+  padding: 16px;
+  font-size: 0.92rem;
+  line-height: 1.8;
+}
+
+.topic.open .topic-body { display: block; }
+
+/* === LEARN ITEM === */
+.learn-item {
+  display: flex;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0ede8;
+  align-items: flex-start;
+}
+
+.learn-item:last-child { border-bottom: none; }
+
+.learn-item input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 2px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.learn-item input[type="checkbox"]:checked {
+  background: var(--success);
+  border-color: var(--success);
+}
+
+.learn-item input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 6px;
+  height: 11px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.learn-item.checked .learn-label { color: var(--text-light); text-decoration: line-through; }
+
+.learn-label { flex: 1; }
+.learn-label strong { font-weight: 600; color: var(--text); }
+.learn-label .desc { display: block; color: var(--text-secondary); font-size: 0.88rem; margin-top: 2px; }
+
+.learn-label a {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.82rem;
+  margin-left: 6px;
+}
+
+.learn-label a:hover { text-decoration: underline; }
+
+/* === CONTENT BLOCK === */
+.content-block {
+  background: var(--code-bg);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 12px 0;
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.content-block h4 {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: var(--primary-dark);
+}
+
+.content-block ul { padding-left: 20px; }
+.content-block li { margin-bottom: 4px; }
+
+.content-block code {
+  background: rgba(0,0,0,0.06);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85em;
+}
+
+.content-block pre {
+  background: #2d2d2d;
+  color: #f0f0f0;
+  padding: 12px 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.85rem;
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.tip-box {
+  background: #fff8e1;
+  border-left: 4px solid #ffc107;
+  padding: 12px 16px;
+  border-radius: 0 8px 8px 0;
+  margin: 12px 0;
+  font-size: 0.9rem;
+}
+
+.tip-box strong { color: #e65100; }
+
+.key-concept {
+  background: linear-gradient(135deg, #fef9f0, #fdf3e7);
+  border: 1px solid #f0d9c0;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 12px 0;
+}
+
+.key-concept h4 { color: var(--primary-dark); margin-bottom: 6px; }
+
+/* === TABLE === */
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 0.88rem;
+}
+
+.info-table th {
+  background: var(--code-bg);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+
+.info-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0ede8;
+}
+
+.info-table a { color: var(--primary); text-decoration: none; }
+.info-table a:hover { text-decoration: underline; }
+
+/* === RESET BUTTON === */
+.reset-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-hover);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  z-index: 50;
+}
+
+.reset-btn:hover { background: #fff0f0; border-color: #ffccc7; }
+
+/* === OVERVIEW TAB === */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.overview-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+}
+
+.overview-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.overview-card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+.overview-card p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 12px; }
+
+.overview-card .card-stats {
+  display: flex;
+  gap: 16px;
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+
+.overview-card .card-stats span { display: flex; align-items: center; gap: 4px; }
+
+/* RECOMMENDED PATH */
+.recommend-box {
+  background: linear-gradient(135deg, #fef9f0, #fff5eb);
+  border: 2px solid var(--primary-light);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.recommend-box h3 { color: var(--primary-dark); margin-bottom: 12px; }
+
+.recommend-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.recommend-step {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.recommend-step .step-num {
+  background: var(--primary);
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* === SCROLL TOP === */
+.scroll-top {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-hover);
+  z-index: 50;
+  transition: opacity 0.3s;
+}
+
+.scroll-top.visible { display: flex; }
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .header-top { flex-direction: column; gap: 8px; text-align: center; }
+  .nav-tabs { overflow-x: auto; padding: 0 12px; }
+  .nav-tab { padding: 8px 14px; font-size: 0.82rem; }
+  .main-content { padding: 16px; }
+  .path-header { padding: 20px; }
+  .path-header h2 { font-size: 1.25rem; }
+  .overview-grid { grid-template-columns: 1fr; }
+  .recommend-steps { flex-direction: column; }
+  .section-header { padding: 14px 16px; }
+  .section-title { font-size: 0.95rem; }
+}
+</style>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-top">
+    <h1>Anthropic Academy <span>한국어 학습 가이드</span></h1>
+    <div class="progress-summary">
+      <span class="progress-text" id="globalProgressText">0 / 0</span>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="globalProgressBar" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+  <nav class="nav-tabs">
+    <button class="nav-tab active" data-tab="overview">전체 보기</button>
+    <button class="nav-tab" data-tab="build">Build with Claude</button>
+    <button class="nav-tab" data-tab="work">Claude for Work</button>
+    <button class="nav-tab" data-tab="personal">Claude for You</button>
+  </nav>
+</header>
+
+<main class="main-content">
+
+<!-- ===================== 전체 보기 탭 ===================== -->
+<div class="tab-content active" id="tab-overview">
+
+  <div class="overview-grid">
+    <div class="overview-card" onclick="switchTab('build')">
+      <h3>Build with Claude</h3>
+      <p>API, SDK, 에이전트, 프롬프트 엔지니어링 등 개발자를 위한 기술 가이드 15개 주제</p>
+      <div class="card-stats">
+        <span id="buildStats">0 / 0 완료</span>
+      </div>
+    </div>
+    <div class="overview-card" onclick="switchTab('work')">
+      <h3>Claude for Work</h3>
+      <p>업무 활용법, 도구 연동, 협업, 부서별 활용 사례 등 팀 생산성 향상 가이드</p>
+      <div class="card-stats">
+        <span id="workStats">0 / 0 완료</span>
+      </div>
+    </div>
+    <div class="overview-card" onclick="switchTab('personal')">
+      <h3>Claude for You</h3>
+      <p>AI Fluency 4D 프레임워크 — AI를 효과적이고 윤리적으로 사용하는 실무 능력</p>
+      <div class="card-stats">
+        <span id="personalStats">0 / 0 완료</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="recommend-box">
+    <h3>추천 학습 순서 (개발자)</h3>
+    <div class="recommend-steps">
+      <div class="recommend-step"><span class="step-num">1</span> Claude Code 실전</div>
+      <div class="recommend-step"><span class="step-num">2</span> 프롬프트 엔지니어링</div>
+      <div class="recommend-step"><span class="step-num">3</span> Tool Use</div>
+      <div class="recommend-step"><span class="step-num">4</span> MCP</div>
+      <div class="recommend-step"><span class="step-num">5</span> 에이전트 패턴</div>
+      <div class="recommend-step"><span class="step-num">6</span> Extended Thinking</div>
+      <div class="recommend-step"><span class="step-num">7</span> 평가(Evals)</div>
+    </div>
+  </div>
+
+  <div class="recommend-box" style="border-color: #c4d8f0; background: linear-gradient(135deg, #f0f5ff, #eef3fb);">
+    <h3 style="color: #3a5a9e;">추천 학습 순서 (비개발자)</h3>
+    <div class="recommend-steps">
+      <div class="recommend-step"><span class="step-num" style="background:#5B82C4">1</span> Claude 101 기초</div>
+      <div class="recommend-step"><span class="step-num" style="background:#5B82C4">2</span> AI Fluency 과정</div>
+      <div class="recommend-step"><span class="step-num" style="background:#5B82C4">3</span> 부서별 활용 사례</div>
+      <div class="recommend-step"><span class="step-num" style="background:#5B82C4">4</span> 아티팩트 + 프로젝트</div>
+      <div class="recommend-step"><span class="step-num" style="background:#5B82C4">5</span> 스킬 활용</div>
+      <div class="recommend-step"><span class="step-num" style="background:#5B82C4">6</span> 도구 연동</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== BUILD 탭 ===================== -->
+<div class="tab-content" id="tab-build">
+  <div class="path-header build">
+    <h2>Build with Claude</h2>
+    <p>API로 Claude 기반 애플리케이션을 만들고 싶은 개발자를 위한 종합 가이드</p>
+    <div class="path-progress">
+      <span id="buildProgressText">0 / 0 완료</span>
+      <div class="path-progress-bar"><div class="path-progress-fill" id="buildProgressBar" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- 1. Claude 4 모델 -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🧠</span> Claude 4 시리즈 모델</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-models">0/6</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="content-block">
+        <h4>핵심 개념</h4>
+        <p>Claude 4 시리즈는 Anthropic의 최신 모델군입니다. 용도에 따라 모델을 선택하세요:</p>
+        <ul>
+          <li><strong>Opus 4.6</strong> — 최고 성능. 복잡한 추론, 장기 에이전트 작업, 코딩에 최적</li>
+          <li><strong>Sonnet 4.6</strong> — 성능과 속도의 균형. 대부분의 업무에 적합</li>
+          <li><strong>Haiku 4.5</strong> — 가장 빠르고 저렴. 대량 처리, 분류, 간단한 작업에 최적</li>
+        </ul>
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-models-1"><div class="learn-label"><strong>Sonnet 4.5 신기능 확인</strong><span class="desc">최신 Sonnet 모델의 변경점과 개선사항</span><a href="https://docs.claude.com/en/docs/about-claude/models/whats-new-sonnet-4-5" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-models-2"><div class="learn-label"><strong>모델 선택 가이드 읽기</strong><span class="desc">용도별 어떤 모델이 적합한지 이해</span><a href="https://docs.anthropic.com/en/docs/about-claude/models/choosing-a-model" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-models-3"><div class="learn-label"><strong>Claude 4 마이그레이션 체크리스트</strong><span class="desc">기존 모델에서 전환할 때 확인해야 할 항목</span><a href="https://docs.anthropic.com/en/docs/about-claude/models/migrating-to-claude-4" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-models-4"><div class="learn-label"><strong>Claude 4 프롬프팅 모범 사례</strong><span class="desc">최신 모델에 최적화된 프롬프트 작성법</span><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/claude-4-best-practices" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-models-5"><div class="learn-label"><strong>모델 비교 차트 확인</strong><span class="desc">모델별 성능, 컨텍스트 윈도우, 가격 비교</span><a href="https://docs.anthropic.com/en/docs/about-claude/models/overview" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-models-6"><div class="learn-label"><strong>가격 체계 이해</strong><span class="desc">입력/출력 토큰당 비용, 캐싱 할인 등</span><a href="https://docs.anthropic.com/en/docs/about-claude/pricing" target="_blank">원문 &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 2. API & SDK -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🔌</span> API & SDK</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-api">0/9</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="content-block">
+        <h4>핵심 개념</h4>
+        <p>Claude를 코드에서 호출하려면 <strong>Messages API</strong>가 기본입니다. SDK는 Python, TypeScript, Java, Go, Ruby 5개 언어를 공식 지원합니다.</p>
+        <ul>
+          <li><strong>Messages API</strong> — Claude와 대화하는 핵심 API. 모든 상호작용의 기반</li>
+          <li><strong>Batch API</strong> — 수백~수천 개 요청을 한꺼번에 처리. 50% 비용 절감</li>
+          <li><strong>Prompt Caching</strong> — 반복 사용하는 시스템 프롬프트를 캐싱. 최대 90% 비용 절감</li>
+          <li><strong>Bedrock / Vertex AI</strong> — AWS, GCP 환경에서 Claude 사용 가능</li>
+        </ul>
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-api-1"><div class="learn-label"><strong>Messages API 이해</strong><span class="desc">기본 요청/응답 구조, role, content 블록 이해</span><a href="https://docs.anthropic.com/en/api/messages" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-api-2"><div class="learn-label"><strong>SDK 설치 및 첫 호출</strong><span class="desc">Python 또는 TypeScript SDK로 첫 API 호출 실행</span><a href="https://docs.anthropic.com/en/api/client-sdks" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-api-3"><div class="learn-label"><strong>Batch API 학습</strong><span class="desc">대량 요청 일괄 처리 방법</span><a href="https://docs.anthropic.com/en/docs/build-with-claude/batch-processing" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-api-4"><div class="learn-label"><strong>Prompt Caching 적용</strong><span class="desc">캐싱으로 비용과 지연시간 최적화</span><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-api-5"><div class="learn-label"><strong>Files API 학습</strong><span class="desc">파일 업로드 및 관리</span><a href="https://docs.anthropic.com/en/docs/build-with-claude/files" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-api-6"><div class="learn-label"><strong>PDF 지원 기능</strong><span class="desc">PDF 텍스트 추출 및 시각 분석</span><a href="https://docs.anthropic.com/en/docs/build-with-claude/pdf-support" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-api-7"><div class="learn-label"><strong>Anthropic API 강좌 수강</strong><span class="desc">Skilljar 온라인 과정</span><a href="https://anthropic.skilljar.com/claude-with-the-anthropic-api" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-api-8"><div class="learn-label"><strong>Admin API 학습</strong><span class="desc">워크스페이스/권한 관리용 API</span><a href="https://docs.anthropic.com/en/api/admin-api/" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-api-9"><div class="learn-label"><strong>프롬프트 도구 API [실험적]</strong><span class="desc">프롬프트 자동 생성/개선/템플릿화</span><a href="https://docs.anthropic.com/en/api/prompt-tools-generate" target="_blank">원문 &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 3. 프롬프트 엔지니어링 -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">✏️</span> 프롬프트 엔지니어링</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-prompt">0/5</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="key-concept">
+        <h4>핵심 원칙 요약</h4>
+        <p>Claude에게 좋은 프롬프트를 작성하는 것은 "신입 직원에게 업무를 설명"하는 것과 같습니다.</p>
+      </div>
+      <div class="content-block">
+        <h4>6가지 핵심 기법</h4>
+        <ul>
+          <li><strong>명확하고 직접적으로</strong> — 구체적인 출력 형식과 제약 조건을 명시하세요. "황금률: 프롬프트를 동료에게 보여주고 따라할 수 있는지 확인하세요."</li>
+          <li><strong>맥락 제공</strong> — 왜 이 지시를 하는지 동기를 설명하면 Claude가 더 잘 이해합니다. 예: "줄임표를 쓰지 마세요" → "TTS 엔진이 줄임표를 발음할 수 없으므로 쓰지 마세요"</li>
+          <li><strong>예시 활용 (Few-shot)</strong> — 3~5개의 좋은 예시를 &lt;example&gt; 태그로 제공하면 정확도가 크게 향상됩니다</li>
+          <li><strong>XML 태그로 구조화</strong> — &lt;instructions&gt;, &lt;context&gt;, &lt;input&gt; 등으로 프롬프트를 구조화하면 Claude가 더 정확히 파싱합니다</li>
+          <li><strong>역할 부여</strong> — 시스템 프롬프트에서 역할을 설정하면 행동과 톤이 집중됩니다. 예: "You are a helpful coding assistant specializing in Python."</li>
+          <li><strong>긴 컨텍스트 처리</strong> — 20K+ 토큰의 문서는 프롬프트 상단에 배치하고, 질문은 마지막에 넣으세요. 성능이 최대 30% 향상됩니다</li>
+        </ul>
+      </div>
+      <div class="tip-box">
+        <strong>팁:</strong> Claude에게 "~하지 마세요"보다 "~하세요"가 더 효과적입니다. 예: "마크다운을 쓰지 마세요" → "매끄러운 산문 문단으로 작성하세요"
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-prompt-1"><div class="learn-label"><strong>프롬프팅 모범 사례 전문 읽기</strong><span class="desc">공식 문서의 전체 가이드 학습</span><a href="https://platform.claude.com/docs/en/docs/build-with-claude/prompt-engineering/claude-prompting-best-practices" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-prompt-2"><div class="learn-label"><strong>대화형 튜토리얼 실습</strong><span class="desc">Jupyter 노트북으로 직접 실습</span><a href="https://github.com/anthropics/prompt-eng-interactive-tutorial" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-prompt-3"><div class="learn-label"><strong>실전 시나리오 연습</strong><span class="desc">실제 업무 상황에 프롬프트 기법 적용</span><a href="https://github.com/anthropics/courses/blob/master/real_world_prompting/README.md" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-prompt-4"><div class="learn-label"><strong>프롬프트 생성기 사용해보기</strong><span class="desc">Console에서 자동 프롬프트 생성 도구 체험</span><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-generator" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-prompt-5"><div class="learn-label"><strong>라운드테이블 영상 시청</strong><span class="desc">전문가들의 프롬프트 엔지니어링 토론</span><a href="https://www.youtube.com/watch?v=T9aRN5JkmL8" target="_blank">YouTube &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 4. 에이전트 -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🤖</span> 에이전트 (Agents)</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-agents">0/4</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="key-concept">
+        <h4>Anthropic의 핵심 철학</h4>
+        <p><em>"가장 성공적인 에이전트는 복잡한 프레임워크가 아니라 <strong>단순하고 조합 가능한 패턴</strong>으로 만들어진다."</em></p>
+      </div>
+      <div class="content-block">
+        <h4>워크플로우 vs 에이전트</h4>
+        <ul>
+          <li><strong>워크플로우</strong> — LLM이 미리 정해진 코드 경로를 따름. 예측 가능하고 안정적</li>
+          <li><strong>에이전트</strong> — LLM이 스스로 프로세스와 도구 사용을 결정. 유연하지만 비용과 지연 시간 증가</li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <h4>5가지 에이전트 패턴</h4>
+        <ul>
+          <li><strong>프롬프트 체이닝</strong> — 작업을 순차 단계로 분해. 각 단계의 출력이 다음 입력이 됨. 예: 마케팅 카피 생성 → 번역</li>
+          <li><strong>라우팅</strong> — 입력을 분류해서 전문화된 하위 작업으로 분배. 예: CS 질문 유형별 다른 처리</li>
+          <li><strong>병렬화</strong> — 여러 LLM 호출을 동시 실행. <em>섹셔닝</em>(독립 하위 작업) 또는 <em>투표</em>(같은 작업 여러 번)</li>
+          <li><strong>오케스트레이터-워커</strong> — 중앙 LLM이 작업을 동적으로 분해하고 워커에게 위임. 예: 멀티 파일 코드 수정</li>
+          <li><strong>평가자-최적화</strong> — 한 LLM이 생성, 다른 LLM이 평가하고 피드백을 반복. 예: 번역 품질 개선</li>
+        </ul>
+      </div>
+      <div class="tip-box">
+        <strong>핵심 원칙 3가지:</strong> 1) 단순하게 2) 투명하게 (계획 과정을 보여주기) 3) 도구 인터페이스를 꼼꼼히 설계 (주니어 개발자 문서 수준으로)
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-agents-1"><div class="learn-label"><strong>효과적인 에이전트 구축 블로그 (필독)</strong><span class="desc">Anthropic 엔지니어링 팀의 에이전트 설계 지침</span><a href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-agents-2"><div class="learn-label"><strong>에이전트 패턴 Cookbook 실습</strong><span class="desc">코드로 직접 패턴 구현해보기</span><a href="https://github.com/anthropics/anthropic-cookbook/tree/main/patterns/agents" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-agents-3"><div class="learn-label"><strong>JSON 출력 일관성 구현</strong><span class="desc">에이전트의 안정적인 제어를 위한 구조화된 출력</span><a href="https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/increase-consistency" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-agents-4"><div class="learn-label"><strong>서브에이전트 오케스트레이션 이해</strong><span class="desc">Claude 4.6의 네이티브 서브에이전트 위임 기능</span></div></div>
+    </div>
+  </div>
+
+  <!-- 5. Tool Use -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🔧</span> Tool Use (도구 사용)</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-tools">0/6</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="content-block">
+        <h4>Tool Use 작동 원리</h4>
+        <p>Claude에게 함수를 정의해주면, Claude가 사용자 요청에 따라 적절한 도구를 선택하고 호출합니다.</p>
+        <ul>
+          <li><strong>클라이언트 도구</strong> — 여러분의 앱에서 실행. Claude가 <code>tool_use</code> 블록을 반환하면 여러분이 실행 후 결과를 다시 보냄</li>
+          <li><strong>서버 도구</strong> — Anthropic 인프라에서 실행. 웹 검색, 코드 실행 등. 결과가 바로 반환됨</li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <h4>제공되는 서버 도구</h4>
+        <ul>
+          <li><strong>web_search</strong> — 실시간 웹 검색</li>
+          <li><strong>code_execution</strong> — 코드를 직접 실행</li>
+          <li><strong>text_editor</strong> — 파일 편집</li>
+          <li><strong>web_fetch</strong> — URL에서 콘텐츠 가져오기</li>
+        </ul>
+      </div>
+      <div class="tip-box">
+        <strong>스키마 보장:</strong> 도구 정의에 <code>strict: true</code>를 추가하면 Claude의 도구 호출이 스키마와 정확히 일치하도록 강제할 수 있습니다.
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-tools-1"><div class="learn-label"><strong>Tool Use 공식 문서 학습</strong><span class="desc">전체 개념 모델과 작동 원리</span><a href="https://platform.claude.com/docs/en/docs/build-with-claude/tool-use/overview" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-tools-2"><div class="learn-label"><strong>Tool Use 강좌 수강</strong><span class="desc">실습 코드 포함 과정</span><a href="https://github.com/anthropics/courses/blob/master/tool_use/README.md" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-tools-3"><div class="learn-label"><strong>데모 영상 시청</strong><span class="desc">Tool Use 실제 작동 예시</span><a href="https://www.youtube.com/watch?v=6wkFb2_cUik" target="_blank">YouTube &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-tools-4"><div class="learn-label"><strong>Cookbook 예제 실습</strong><span class="desc">다양한 Tool Use 시나리오 코드</span><a href="https://github.com/anthropics/anthropic-cookbook/tree/main/tool_use" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-tools-5"><div class="learn-label"><strong>Strict Tool Use 적용</strong><span class="desc">스키마 준수를 보장하는 설정</span></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-tools-6"><div class="learn-label"><strong>병렬 도구 호출 최적화</strong><span class="desc">여러 도구를 동시에 호출하는 방법</span></div></div>
+    </div>
+  </div>
+
+  <!-- 6. MCP -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🔗</span> MCP (Model Context Protocol)</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-mcp">0/7</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="key-concept">
+        <h4>MCP = AI의 USB-C 포트</h4>
+        <p>USB-C가 전자기기 연결을 표준화한 것처럼, MCP는 AI 앱이 외부 시스템(파일, DB, 도구 등)에 접근하는 방식을 표준화하는 오픈소스 프로토콜입니다.</p>
+      </div>
+      <div class="content-block">
+        <h4>MCP로 가능한 것들</h4>
+        <ul>
+          <li>에이전트가 Google Calendar, Notion에 접근해서 개인화된 비서 역할</li>
+          <li>Claude Code가 Figma 디자인을 보고 웹앱을 통째로 생성</li>
+          <li>기업 챗봇이 여러 데이터베이스에 연결해서 데이터 분석</li>
+          <li>AI 모델이 Blender에서 3D 디자인을 만들어 3D 프린터로 출력</li>
+        </ul>
+      </div>
+      <div class="content-block">
+        <h4>지원 클라이언트</h4>
+        <p>Claude, ChatGPT, VS Code, Cursor 등 다양한 AI 도구가 MCP를 지원합니다. 한 번 만들면 어디서나 통합 가능합니다.</p>
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-mcp-1"><div class="learn-label"><strong>MCP 소개 문서 읽기</strong><span class="desc">MCP의 개념과 아키텍처 이해</span><a href="https://modelcontextprotocol.io/introduction" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-mcp-2"><div class="learn-label"><strong>Claude Desktop에서 MCP 설정</strong><span class="desc">빠른 시작 가이드</span><a href="https://modelcontextprotocol.io/quickstart/user" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-mcp-3"><div class="learn-label"><strong>공식 MCP 서버 둘러보기</strong><span class="desc">바로 쓸 수 있는 서버 모음</span><a href="https://github.com/modelcontextprotocol/servers" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-mcp-4"><div class="learn-label"><strong>Claude Code에서 MCP 사용</strong><span class="desc">CLI 환경에서 MCP 서버 연결</span><a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/tutorials#set-up-model-context-protocol-mcp" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-mcp-5"><div class="learn-label"><strong>MCP 입문 강좌 수강</strong><span class="desc">Skilljar 온라인 과정</span><a href="https://anthropic.skilljar.com/introduction-to-model-context-protocol" target="_blank">Skilljar &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-mcp-6"><div class="learn-label"><strong>MCP 심화 강좌 수강</strong><span class="desc">고급 개념 학습</span><a href="https://anthropic.skilljar.com/model-context-protocol-advanced-topics" target="_blank">Skilljar &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-mcp-7"><div class="learn-label"><strong>리모트 MCP 서버 설정</strong><span class="desc">원격 서버 연결 방법</span><a href="https://docs.anthropic.com/en/docs/agents-and-tools/remote-mcp-servers" target="_blank">원문 &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 7. Claude Code -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">💻</span> Claude Code</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-code">0/7</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="content-block">
+        <h4>Claude Code란?</h4>
+        <p>터미널에서 Claude를 사용하는 CLI 개발 도구입니다. 코드 작성, 디버깅, 리팩토링, Git 작업 등을 자연어로 지시할 수 있습니다. CLI, 데스크톱 앱, 웹 앱, IDE 확장 등 다양한 형태로 제공됩니다.</p>
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-code-1"><div class="learn-label"><strong>Claude Code 설치 및 시작</strong><span class="desc">npm install -g @anthropic-ai/claude-code</span><a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-code-2"><div class="learn-label"><strong>IDE 연동 설정</strong><span class="desc">VS Code, JetBrains 등과 통합</span><a href="https://docs.anthropic.com/en/docs/claude-code/ide-integrations" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-code-3"><div class="learn-label"><strong>일반 워크플로우 익히기</strong><span class="desc">자주 쓰는 작업 패턴</span><a href="https://docs.claude.com/en/docs/claude-code/common-workflows" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-code-4"><div class="learn-label"><strong>Claude Code 실전 강좌 수강</strong><span class="desc">Skilljar 온라인 과정</span><a href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank">Skilljar &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-code-5"><div class="learn-label"><strong>서브에이전트 입문 강좌</strong><span class="desc">Claude Code의 서브에이전트 활용법</span><a href="https://anthropic.skilljar.com/introduction-to-subagents" target="_blank">Skilljar &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-code-6"><div class="learn-label"><strong>에이전트 스킬 입문 강좌</strong><span class="desc">스킬 만들기와 활용</span><a href="https://anthropic.skilljar.com/introduction-to-agent-skills" target="_blank">Skilljar &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-code-7"><div class="learn-label"><strong>트러블슈팅 가이드 확인</strong><span class="desc">문제 발생 시 해결 방법</span><a href="https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/troubleshooting" target="_blank">원문 &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 8. Skills -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">⚡</span> 스킬 (Skills)</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-skills">0/4</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="content-block">
+        <h4>스킬이란?</h4>
+        <p>특정 작업을 더 잘 수행하도록 상세 지침을 제공하는 기능입니다. 반복되는 작업의 품질과 일관성을 높일 수 있습니다.</p>
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-skills-1"><div class="learn-label"><strong>스킬 개요 학습</strong><span class="desc">스킬의 개념과 구조</span><a href="https://docs.claude.com/en/docs/agents-and-tools/agent-skills/overview" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-skills-2"><div class="learn-label"><strong>스킬 모범 사례</strong><span class="desc">좋은 스킬을 만드는 방법</span><a href="https://docs.claude.com/en/docs/agents-and-tools/agent-skills/best-practices" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-skills-3"><div class="learn-label"><strong>API에서 스킬 사용</strong><span class="desc">API 호출 시 스킬 적용</span><a href="https://docs.claude.com/en/api/skills-guide" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-skills-4"><div class="learn-label"><strong>Claude Code에서 스킬 사용</strong><span class="desc">CLI에서 스킬 활용</span><a href="https://docs.claude.com/en/docs/claude-code/skills" target="_blank">원문 &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 9. Extended Thinking -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">💭</span> 확장 사고 (Extended Thinking)</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-thinking">0/4</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="content-block">
+        <h4>핵심 개념</h4>
+        <p>Claude에게 "생각하는 시간"을 주는 기능입니다. 복잡한 문제에서 Claude가 내부적으로 단계별 추론을 거친 후 최종 답변을 제공합니다.</p>
+        <ul>
+          <li><strong>Adaptive Thinking (권장)</strong> — Claude가 문제 난이도에 따라 자동으로 사고 깊이를 조절. <code>effort</code> 파라미터로 제어 (low/medium/high/max)</li>
+          <li><strong>Extended Thinking (레거시)</strong> — <code>budget_tokens</code>으로 사고 토큰 수를 수동 설정. Claude 4.6에서는 deprecated</li>
+        </ul>
+      </div>
+      <div class="tip-box">
+        <strong>팁:</strong> Claude 4.6 모델에서는 Adaptive Thinking을 사용하세요. <code>thinking: {"type": "adaptive"}</code>로 설정하고 <code>effort</code>로 깊이를 조절합니다. 대부분의 경우 Extended Thinking보다 좋은 성능을 보입니다.
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-thinking-1"><div class="learn-label"><strong>Extended Thinking 문서 읽기</strong><span class="desc">전체 기술 문서 학습</span><a href="https://platform.claude.com/docs/en/docs/build-with-claude/extended-thinking" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-thinking-2"><div class="learn-label"><strong>Adaptive Thinking 이해</strong><span class="desc">Claude 4.6의 권장 사고 모드</span></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-thinking-3"><div class="learn-label"><strong>Cookbook 예제 실습</strong><span class="desc">코드로 직접 구현해보기</span><a href="https://github.com/anthropics/anthropic-cookbook/tree/main/extended_thinking" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-thinking-4"><div class="learn-label"><strong>모범 사례 팁 학습</strong><span class="desc">최적 결과를 위한 설정 가이드</span><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/extended-thinking-tips" target="_blank">원문 &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 10. RAG -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🔍</span> RAG (검색 증강 생성)</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-rag">0/5</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="content-block">
+        <h4>RAG란?</h4>
+        <p>Claude가 모르는 최신 정보나 사내 문서를 <strong>"검색해서 읽고 답변"</strong>하게 만드는 기법입니다. 텍스트를 벡터(임베딩)로 변환 → 유사도 검색 → 관련 문서를 프롬프트에 포함 → Claude가 답변하는 흐름입니다.</p>
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-rag-1"><div class="learn-label"><strong>CS봇 예제로 RAG 체험</strong><span class="desc">고객 지원 에이전트 구축 실습</span><a href="https://github.com/anthropics/anthropic-quickstarts/tree/main/customer-support-agent" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-rag-2"><div class="learn-label"><strong>Voyage AI 임베딩 학습</strong><span class="desc">텍스트를 벡터로 변환하는 방법</span><a href="https://github.com/anthropics/anthropic-cookbook/blob/main/third_party/VoyageAI/how_to_create_embeddings.md" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-rag-3"><div class="learn-label"><strong>Contextual Retrieval 이해</strong><span class="desc">검색 품질을 높이는 Anthropic의 기법</span><a href="https://www.anthropic.com/news/contextual-retrieval" target="_blank">블로그 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-rag-4"><div class="learn-label"><strong>LlamaIndex 연동 실습</strong><span class="desc">LlamaIndex 프레임워크와 통합</span><a href="https://github.com/anthropics/anthropic-cookbook/tree/main/third_party/LlamaIndex" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-rag-5"><div class="learn-label"><strong>임베딩 문서 학습</strong><span class="desc">공식 임베딩 문서</span><a href="https://docs.anthropic.com/en/docs/build-with-claude/embeddings" target="_blank">원문 &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 11. Evaluations -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">📊</span> 평가 (Evaluations)</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-evals">0/3</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="content-block">
+        <h4>왜 평가가 중요한가?</h4>
+        <p>프롬프트나 모델을 변경할 때 성능이 좋아졌는지 나빠졌는지 객관적으로 측정하는 것이 핵심입니다. "감으로" 판단하지 말고 체계적으로 평가하세요.</p>
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-evals-1"><div class="learn-label"><strong>강력한 평가 만들기 과정</strong><span class="desc">평가 설계의 기초</span><a href="https://github.com/anthropics/courses/blob/master/prompt_evaluations/README.md" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-evals-2"><div class="learn-label"><strong>자동화된 평가 구축</strong><span class="desc">자동 평가 파이프라인 만들기</span><a href="https://github.com/anthropics/anthropic-cookbook/blob/main/misc/building_evals.ipynb" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-evals-3"><div class="learn-label"><strong>Eval Tool 사용</strong><span class="desc">Console 웹에서 평가 실행</span><a href="https://docs.anthropic.com/en/docs/test-and-evaluate/eval-tool" target="_blank">원문 &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 12. Vision -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">👁️</span> 비전 (Vision)</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-vision">0/4</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="content-block">
+        <h4>비전 기능</h4>
+        <p>Claude는 이미지를 보고 이해할 수 있습니다. OCR, 차트 분석, UI 스크린샷 해석 등 다양한 시각 작업이 가능합니다. Claude 4.5/4.6에서 성능이 크게 향상되었습니다.</p>
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-vision-1"><div class="learn-label"><strong>비전 시작 가이드</strong><span class="desc">기본 사용법</span><a href="https://github.com/anthropics/anthropic-cookbook/blob/main/multimodal/getting_started_with_vision.ipynb" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-vision-2"><div class="learn-label"><strong>비전 모범 사례</strong><span class="desc">최적의 결과를 위한 팁</span><a href="https://github.com/anthropics/anthropic-cookbook/blob/main/multimodal/best_practices_for_vision.ipynb" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-vision-3"><div class="learn-label"><strong>이미지 텍스트 추출</strong><span class="desc">OCR 대용으로 활용</span><a href="https://github.com/anthropics/anthropic-cookbook/blob/main/multimodal/how_to_transcribe_text.ipynb" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-vision-4"><div class="learn-label"><strong>차트/그래프 분석</strong><span class="desc">시각 자료 해석</span><a href="https://github.com/anthropics/anthropic-cookbook/blob/main/multimodal/reading_charts_graphs_powerpoints.ipynb" target="_blank">GitHub &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 13. Computer Use -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🖥️</span> Computer Use</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-computer">0/3</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="content-block">
+        <h4>Computer Use란?</h4>
+        <p>Claude가 마우스와 키보드로 컴퓨터 화면을 직접 조작하는 기능입니다. 스크린샷을 보고, 클릭하고, 타이핑하는 등 사람처럼 컴퓨터를 사용합니다.</p>
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-computer-1"><div class="learn-label"><strong>퀵스타트 데모 실행</strong><span class="desc">Docker로 바로 체험</span><a href="https://github.com/anthropics/anthropic-quickstarts/tree/main/computer-use-demo" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-computer-2"><div class="learn-label"><strong>API 구현 가이드</strong><span class="desc">코드로 Computer Use 구현</span><a href="https://docs.anthropic.com/en/docs/agents-and-tools/computer-use" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-computer-3"><div class="learn-label"><strong>개발 배경 블로그 읽기</strong><span class="desc">어떻게 만들었는지</span><a href="https://www.anthropic.com/news/developing-computer-use" target="_blank">블로그 &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 14. Prompt Caching -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">💾</span> 프롬프트 캐싱</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-caching">0/3</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="content-block">
+        <h4>프롬프트 캐싱이란?</h4>
+        <p>자주 사용하는 시스템 프롬프트나 긴 문서를 캐싱해서 매번 다시 보내지 않아도 되는 기능입니다. 비용 최대 90% 절감, 지연 시간 85% 단축이 가능합니다.</p>
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-caching-1"><div class="learn-label"><strong>설명 영상 시청</strong><span class="desc">개념 소개 영상</span><a href="https://www.youtube.com/watch?v=h18BezoizkI" target="_blank">YouTube &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-caching-2"><div class="learn-label"><strong>Cookbook 구현 실습</strong><span class="desc">코드로 캐싱 구현</span><a href="https://github.com/anthropics/anthropic-cookbook/blob/main/misc/prompt_caching.ipynb" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-caching-3"><div class="learn-label"><strong>공식 문서 학습</strong><span class="desc">전체 기술 문서</span><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching" target="_blank">원문 &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 15. 해커톤 가이드 -->
+  <div class="section" data-path="build">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🏆</span> 해커톤 가이드</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="build-hackathon">0/4</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="content-block">
+        <h4>빠르게 시작하기 위한 자료 모음</h4>
+        <p>해커톤이나 사이드 프로젝트를 빠르게 시작할 때 유용한 자료들입니다.</p>
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="build-hackathon-1"><div class="learn-label"><strong>Console에서 API 키 발급</strong><span class="desc">개발자 계정 생성</span><a href="https://console.anthropic.com" target="_blank">Console &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-hackathon-2"><div class="learn-label"><strong>퀵스타트로 첫 API 호출</strong><span class="desc">가장 빠른 시작 방법</span><a href="https://docs.anthropic.com/en/docs/get-started" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-hackathon-3"><div class="learn-label"><strong>Cookbook 코드 예제 둘러보기</strong><span class="desc">다양한 워크플로우 예제</span><a href="https://github.com/anthropics/anthropic-cookbook" target="_blank">GitHub &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="build-hackathon-4"><div class="learn-label"><strong>Quickstarts 앱 템플릿 확인</strong><span class="desc">바로 쓸 수 있는 시작 프로젝트</span><a href="https://github.com/anthropics/anthropic-quickstarts" target="_blank">GitHub &rarr;</a></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== WORK 탭 ===================== -->
+<div class="tab-content" id="tab-work">
+  <div class="path-header work">
+    <h2>Claude for Work</h2>
+    <p>조직에서 Claude를 활용해 팀 생산성을 높이는 방법</p>
+    <div class="path-progress">
+      <span id="workProgressText">0 / 0 완료</span>
+      <div class="path-progress-bar"><div class="path-progress-fill" id="workProgressBar" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- 시작하기 -->
+  <div class="section" data-path="work">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🚀</span> 처음 시작하기</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="work-start">0/3</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="learn-item"><input type="checkbox" data-id="work-start-1"><div class="learn-label"><strong>Claude.ai 시작 가이드</strong><span class="desc">기본 사용법 익히기</span><a href="https://support.claude.com/en/articles/12997377-getting-started-with-claude-ai" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-start-2"><div class="learn-label"><strong>활용 사례 모음 둘러보기</strong><span class="desc">영감을 얻을 수 있는 예시들</span><a href="https://claude.com/resources/use-cases" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-start-3"><div class="learn-label"><strong>Claude 101 강좌 수강</strong><span class="desc">기초 과정</span><a href="https://anthropic.skilljar.com/claude-101" target="_blank">Skilljar &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 모델 이해 -->
+  <div class="section" data-path="work">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🧠</span> 최신 모델 활용법</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="work-models">0/2</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="learn-item"><input type="checkbox" data-id="work-models-1"><div class="learn-label"><strong>Sonnet 4.5 최대 활용 팁</strong><span class="desc">일상 업무에 최적화된 사용법</span><a href="https://claude.com/resources/tutorials/getting-the-most-out-of-sonnet-4-5-in-claude-ai" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-models-2"><div class="learn-label"><strong>Opus 4.6 최대 활용 팁</strong><span class="desc">복잡한 업무에 최적화된 사용법</span><a href="https://claude.com/resources/tutorials/get-the-most-from-claude-opus-4-6" target="_blank">원문 &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 부서별 활용 -->
+  <div class="section" data-path="work">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🏢</span> 부서별 활용 사례</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="work-depts">0/5</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="learn-item"><input type="checkbox" data-id="work-depts-1"><div class="learn-label"><strong>엔지니어링</strong><span class="desc">코드 리뷰, 디버깅, 문서 작성</span><a href="https://support.anthropic.com/en/articles/9945689-claude-for-engineering" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-depts-2"><div class="learn-label"><strong>인사(HR)</strong><span class="desc">채용 공고, 면접 질문, 정책 작성</span><a href="https://support.anthropic.com/en/articles/9998942-claude-for-human-resources" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-depts-3"><div class="learn-label"><strong>마케팅</strong><span class="desc">콘텐츠 작성, 캠페인 기획</span><a href="https://support.anthropic.com/en/articles/9945697-claude-for-marketing" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-depts-4"><div class="learn-label"><strong>프로덕트 매니지먼트</strong><span class="desc">PRD 작성, 사용자 리서치 분석</span><a href="https://support.anthropic.com/en/articles/9999062-claude-for-product-management" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-depts-5"><div class="learn-label"><strong>영업</strong><span class="desc">제안서, 고객 이메일, 경쟁사 분석</span><a href="https://support.anthropic.com/en/articles/9945703-claude-for-sales" target="_blank">원문 &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 주요 기능 -->
+  <div class="section" data-path="work">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">✨</span> 핵심 기능 익히기</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="work-features">0/8</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="content-block">
+        <h4>주요 기능 6가지</h4>
+        <ul>
+          <li><strong>아티팩트</strong> — 대화 중 파일/콘텐츠를 생성하고 관리. 코드, 문서, 차트 등</li>
+          <li><strong>프로젝트</strong> — 관련 대화와 파일을 한 곳에 정리. 팀 협업 지원</li>
+          <li><strong>스킬</strong> — 반복 작업의 품질을 높이는 상세 지침 저장</li>
+          <li><strong>리서치</strong> — 여러 소스를 검색해 종합적 인사이트 제공</li>
+          <li><strong>도구 연동</strong> — GitHub, Google Docs 등 외부 서비스 연결</li>
+          <li><strong>Claude Cowork</strong> — 실제 파일과 프로젝트에서 Claude와 협업</li>
+        </ul>
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="work-features-1"><div class="learn-label"><strong>아티팩트 사용법</strong><span class="desc">파일/콘텐츠 생성 및 관리</span><a href="https://support.anthropic.com/en/articles/9945615-intro-to-artifacts" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-features-2"><div class="learn-label"><strong>프로젝트 사용법</strong><span class="desc">작업 정리 및 협업</span><a href="https://support.anthropic.com/en/articles/9945648-intro-to-projects" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-features-3"><div class="learn-label"><strong>스킬 알아보기 & 만들기</strong><span class="desc">커스텀 스킬 생성법</span><a href="https://support.claude.com/en/articles/12512198-creating-custom-skills" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-features-4"><div class="learn-label"><strong>리서치 기능 사용</strong><span class="desc">에이전틱 검색 활용</span><a href="https://support.anthropic.com/en/articles/11106443-using-research" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-features-5"><div class="learn-label"><strong>Google Workspace 연동</strong><span class="desc">Google Docs와 리서치 통합</span><a href="https://support.anthropic.com/en/articles/11101545-using-research-and-google-workspace" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-features-6"><div class="learn-label"><strong>GitHub 연동</strong><span class="desc">코드 저장소 연결</span><a href="https://support.anthropic.com/en/articles/9945670-using-the-github-integration" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-features-7"><div class="learn-label"><strong>분석 도구 사용</strong><span class="desc">데이터 분석 기능</span><a href="https://support.anthropic.com/en/articles/10227619-using-the-analysis-tool" target="_blank">원문 &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-features-8"><div class="learn-label"><strong>Claude Cowork 입문 강좌</strong><span class="desc">실제 파일 기반 협업</span><a href="https://anthropic.skilljar.com/introduction-to-claude-cowork" target="_blank">Skilljar &rarr;</a></div></div>
+    </div>
+  </div>
+
+  <!-- 업무용 강좌 -->
+  <div class="section" data-path="work">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🎓</span> 업무용 강좌</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="work-courses">0/2</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="learn-item"><input type="checkbox" data-id="work-courses-1"><div class="learn-label"><strong>비영리 단체용 AI 활용</strong><span class="desc">비영리 종사자를 위한 과정</span><a href="https://anthropic.skilljar.com/ai-fluency-for-nonprofits" target="_blank">Skilljar &rarr;</a></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="work-courses-2"><div class="learn-label"><strong>교육자용 AI 활용</strong><span class="desc">교사/교수를 위한 과정</span><a href="https://anthropic.skilljar.com/ai-fluency-for-educators" target="_blank">Skilljar &rarr;</a></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PERSONAL 탭 ===================== -->
+<div class="tab-content" id="tab-personal">
+  <div class="path-header personal">
+    <h2>Claude for You</h2>
+    <p>AI를 효과적이고 윤리적으로 사용하는 실무 능력을 기르는 과정</p>
+    <div class="path-progress">
+      <span id="personalProgressText">0 / 0 완료</span>
+      <div class="path-progress-bar"><div class="path-progress-fill" id="personalProgressBar" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- AI Fluency -->
+  <div class="section" data-path="personal">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🎯</span> AI Fluency 4D 프레임워크</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="personal-fluency">0/12</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="key-concept">
+        <h4>4D 프레임워크</h4>
+        <p>AI를 잘 사용하기 위한 4가지 핵심 역량:</p>
+        <p><strong>Delegation(위임)</strong> → AI에게 뭘 맡길지 판단<br>
+        <strong>Description(기술)</strong> → 원하는 것을 정확히 표현<br>
+        <strong>Discernment(판별)</strong> → AI 결과물을 비판적으로 평가<br>
+        <strong>Diligence(성실)</strong> → 책임감 있게 AI 사용</p>
+      </div>
+      <div class="tip-box">
+        <strong>강좌 링크:</strong> <a href="https://anthropic.skilljar.com/ai-fluency-framework-foundations" target="_blank">AI Fluency: Framework & Foundations (Skilljar)</a>
+      </div>
+      <div class="learn-item"><input type="checkbox" data-id="personal-fluency-1"><div class="learn-label"><strong>1. AI Fluency 소개</strong><span class="desc">왜 AI 활용 능력이 중요한가</span></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="personal-fluency-2"><div class="learn-label"><strong>2. AI Fluency 프레임워크 개요</strong><span class="desc">4D 프레임워크 전체 구조</span></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="personal-fluency-3"><div class="learn-label"><strong>3. 딥다이브: 생성형 AI란?</strong><span class="desc">AI 기초 원리 이해 — LLM이 어떻게 작동하는지</span></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="personal-fluency-4"><div class="learn-label"><strong>4. 위임 (Delegation)</strong><span class="desc">AI에게 무엇을 맡기고 무엇은 직접 할지 판단하는 기준</span></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="personal-fluency-5"><div class="learn-label"><strong>5. 위임 적용</strong><span class="desc">실제 상황에서 위임 원칙을 적용하는 연습</span></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="personal-fluency-6"><div class="learn-label"><strong>6. 기술 (Description)</strong><span class="desc">원하는 결과를 정확하게 표현하는 방법 — 좋은 프롬프트의 기초</span></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="personal-fluency-7"><div class="learn-label"><strong>7. 딥다이브: 효과적인 프롬프팅</strong><span class="desc">프롬프트 작성 기법 심화 학습</span></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="personal-fluency-8"><div class="learn-label"><strong>8. 판별 (Discernment)</strong><span class="desc">AI 결과물이 정확한지, 유용한지 비판적으로 평가하는 눈</span></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="personal-fluency-9"><div class="learn-label"><strong>9. 기술-판별 루프</strong><span class="desc">프롬프트 작성 → 결과 평가 → 개선 → 반복하는 순환 과정</span></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="personal-fluency-10"><div class="learn-label"><strong>10. 성실 (Diligence)</strong><span class="desc">AI를 윤리적이고 책임감 있게 사용하는 원칙</span></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="personal-fluency-11"><div class="learn-label"><strong>11. 결론</strong><span class="desc">전체 프레임워크 정리 및 다음 단계</span></div></div>
+      <div class="learn-item"><input type="checkbox" data-id="personal-fluency-12"><div class="learn-label"><strong>12. 추가 활동</strong><span class="desc">실습 과제로 학습 내용 적용</span></div></div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- BUTTONS -->
+<button class="reset-btn" onclick="resetProgress()">초기화</button>
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
+
+<script>
+// === State ===
+const STORAGE_KEY = 'anthropic-academy-progress';
+
+function loadProgress() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
+}
+
+function saveProgress(progress) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+}
+
+// === Init checkboxes ===
+function initCheckboxes() {
+  const progress = loadProgress();
+  document.querySelectorAll('.learn-item input[type="checkbox"]').forEach(cb => {
+    const id = cb.dataset.id;
+    if (progress[id]) {
+      cb.checked = true;
+      cb.closest('.learn-item').classList.add('checked');
+    }
+    cb.addEventListener('change', () => {
+      const p = loadProgress();
+      if (cb.checked) {
+        p[id] = true;
+        cb.closest('.learn-item').classList.add('checked');
+      } else {
+        delete p[id];
+        cb.closest('.learn-item').classList.remove('checked');
+      }
+      saveProgress(p);
+      updateAllProgress();
+    });
+  });
+}
+
+// === Progress ===
+function countItems(selector) {
+  const items = document.querySelectorAll(selector);
+  let total = 0, done = 0;
+  items.forEach(cb => { total++; if (cb.checked) done++; });
+  return { total, done };
+}
+
+function updateSectionCounts() {
+  document.querySelectorAll('.section-count').forEach(el => {
+    const section = el.dataset.section;
+    const items = document.querySelectorAll(`input[data-id^="${section}"]`);
+    let done = 0;
+    items.forEach(cb => { if (cb.checked) done++; });
+    el.textContent = `${done}/${items.length}`;
+    el.classList.toggle('done', done === items.length && items.length > 0);
+  });
+}
+
+function updatePathProgress(path) {
+  const { total, done } = countItems(`#tab-${path} input[type="checkbox"]`);
+  const pct = total ? Math.round(done / total * 100) : 0;
+  const textEl = document.getElementById(`${path}ProgressText`);
+  const barEl = document.getElementById(`${path}ProgressBar`);
+  if (textEl) textEl.textContent = `${done} / ${total} 완료`;
+  if (barEl) barEl.style.width = pct + '%';
+  return { total, done };
+}
+
+function updateGlobalProgress() {
+  const all = countItems('input[type="checkbox"][data-id]');
+  const pct = all.total ? Math.round(all.done / all.total * 100) : 0;
+  document.getElementById('globalProgressText').textContent = `${all.done} / ${all.total} (${pct}%)`;
+  document.getElementById('globalProgressBar').style.width = pct + '%';
+}
+
+function updateOverviewStats() {
+  ['build', 'work', 'personal'].forEach(path => {
+    const { total, done } = countItems(`#tab-${path} input[type="checkbox"]`);
+    const el = document.getElementById(`${path}Stats`);
+    if (el) el.textContent = `${done} / ${total} 완료`;
+  });
+}
+
+function updateAllProgress() {
+  updateSectionCounts();
+  ['build', 'work', 'personal'].forEach(updatePathProgress);
+  updateGlobalProgress();
+  updateOverviewStats();
+}
+
+// === Tabs ===
+function switchTab(tabId) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+  document.getElementById('tab-' + tabId).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+});
+
+// === Sections toggle ===
+function toggleSection(header) {
+  header.closest('.section').classList.toggle('open');
+}
+
+// === Topic toggle ===
+document.querySelectorAll('.topic-header').forEach(h => {
+  h.addEventListener('click', () => h.closest('.topic').classList.toggle('open'));
+});
+
+// === Reset ===
+function resetProgress() {
+  if (!confirm('모든 학습 진행 상황을 초기화할까요?')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.checked = false;
+    cb.closest('.learn-item')?.classList.remove('checked');
+  });
+  updateAllProgress();
+}
+
+// === Scroll top button ===
+window.addEventListener('scroll', () => {
+  document.getElementById('scrollTopBtn').classList.toggle('visible', window.scrollY > 400);
+});
+
+// === Init ===
+initCheckboxes();
+updateAllProgress();
+</script>
+</body>
+</html>
