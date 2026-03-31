@@ -596,6 +596,27 @@ body {
   margin-bottom: 8px;
 }
 
+.course-start-btn {
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 12px;
+  padding: 8px 20px;
+  background: var(--primary);
+  color: white;
+  border: 2px solid var(--primary);
+  border-radius: 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.course-start-btn:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
 /* === SCROLL TOP === */
 .scroll-top {
   position: fixed;
@@ -706,16 +727,7 @@ body {
           <span class="course-tag">Thinking 모드</span>
         </div>
         <a class="course-link" href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank">Skilljar에서 수강하기 &rarr;</a>
-
-        <div class="video-section">
-          <h4>관련 영상</h4>
-          <div class="video-embed" style="margin-bottom:8px;">
-            <iframe src="https://www.youtube.com/embed/AJpK3YTTKZ4" title="Claude Code Launch Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-          </div>
-          <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/OwMu0pyYZBc" title="Claude Code modernizes a legacy COBOL codebase" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-          </div>
-        </div>
+        <button class="course-start-btn" onclick="document.getElementById('course-claude-code').scrollIntoView({behavior:'smooth'}); document.getElementById('course-claude-code').classList.add('open');">학습 시작 &darr;</button>
       </div>
     </div>
 
@@ -735,16 +747,383 @@ body {
           <span class="course-tag">멀티스텝 제어</span>
         </div>
         <a class="course-link" href="https://anthropic.skilljar.com/introduction-to-claude-cowork" target="_blank">Skilljar에서 수강하기 &rarr;</a>
+        <button class="course-start-btn" style="background:var(--path-work); border-color:var(--path-work);" onclick="document.getElementById('course-cowork').scrollIntoView({behavior:'smooth'}); document.getElementById('course-cowork').classList.add('open');">학습 시작 &darr;</button>
+      </div>
+    </div>
+  </div>
 
-        <div class="video-section">
-          <h4>관련 영상</h4>
-          <div class="video-embed" style="margin-bottom:8px;">
-            <iframe src="https://www.youtube.com/embed/LpGpwhORWr0" title="Claude works with you on slides, spreadsheets, and contract redlines" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-          </div>
-          <div class="video-embed">
-            <iframe src="https://www.youtube.com/embed/rlIy7b-3DC8" title="Claude Cowork Tutorial from Design Lead" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-          </div>
+  <!-- ===================== 강좌: Claude Code in Action ===================== -->
+  <div class="section open" id="course-claude-code" data-path="overview">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">💻</span> Claude Code in Action — 전체 학습</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="course-cc">0/24</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <!-- 모듈 1: 시작하기 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 1: 설치 및 시작하기</strong>
         </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>Claude Code란?</h4>
+            <p>코드베이스를 읽고, 파일을 편집하고, 명령을 실행하고, 개발 도구와 통합되는 에이전틱 코딩 도구입니다. 터미널, IDE, 데스크톱 앱, 브라우저에서 사용 가능합니다.</p>
+          </div>
+          <div class="content-block">
+            <h4>설치 방법</h4>
+            <pre>// macOS, Linux, WSL
+curl -fsSL https://claude.ai/install.sh | bash
+
+// Windows PowerShell
+irm https://claude.ai/install.ps1 | iex
+
+// 프로젝트에서 시작
+cd your-project
+claude</pre>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-1"><div class="learn-label"><strong>Claude Code 설치</strong><span class="desc">자신의 환경에 맞는 방법으로 설치 완료</span><a href="https://code.claude.com/docs/en/overview" target="_blank">원문 &rarr;</a></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-2"><div class="learn-label"><strong>첫 프로젝트에서 실행</strong><span class="desc">실제 프로젝트 디렉토리에서 <code>claude</code> 명령 실행</span><a href="https://code.claude.com/docs/en/quickstart" target="_blank">원문 &rarr;</a></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-3"><div class="learn-label"><strong>IDE 연동 설정</strong><span class="desc">VS Code 또는 JetBrains 확장 설치</span><a href="https://code.claude.com/docs/en/vs-code" target="_blank">원문 &rarr;</a></div></div>
+        </div>
+      </div>
+
+      <!-- 모듈 2: 코딩 어시스턴트 아키텍처 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 2: 코딩 어시스턴트 아키텍처 이해</strong>
+        </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>핵심 개념</h4>
+            <p>Claude Code는 <strong>에이전틱 루프</strong>로 작동합니다. 사용자 지시 → 코드 분석 → 계획 수립 → 파일 편집 → 명령 실행 → 검증의 반복입니다.</p>
+            <ul>
+              <li><strong>CLAUDE.md</strong> — 프로젝트 루트에 두는 지침 파일. 코딩 표준, 아키텍처 결정, 리뷰 체크리스트 등 설정</li>
+              <li><strong>Auto Memory</strong> — Claude가 작업하면서 빌드 명령, 디버깅 인사이트 등을 자동 저장</li>
+              <li><strong>컨텍스트 관리</strong> — @ 참조로 파일/디렉토리를 빠르게 포함. 긴 세션에서는 자동 컨텍스트 압축</li>
+            </ul>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-4"><div class="learn-label"><strong>CLAUDE.md 파일 작성</strong><span class="desc">프로젝트 루트에 코딩 표준 및 지침 파일 생성</span><a href="https://code.claude.com/docs/en/memory" target="_blank">원문 &rarr;</a></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-5"><div class="learn-label"><strong>@ 파일 참조 사용해보기</strong><span class="desc">@src/utils.js 형태로 파일을 대화에 포함</span></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-6"><div class="learn-label"><strong>세션 이어가기 실습</strong><span class="desc">--continue, --resume, /rename 명령 사용</span><a href="https://code.claude.com/docs/en/common-workflows" target="_blank">원문 &rarr;</a></div></div>
+        </div>
+      </div>
+
+      <!-- 모듈 3: 도구 시스템 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 3: 도구 시스템 활용</strong>
+        </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>Claude Code가 사용하는 도구들</h4>
+            <p>Claude Code는 파일 읽기/쓰기, Bash 명령 실행, 웹 검색 등 다양한 도구를 자동으로 선택하여 사용합니다.</p>
+            <ul>
+              <li><strong>Read/Write/Edit</strong> — 파일 읽기, 생성, 편집</li>
+              <li><strong>Bash</strong> — 터미널 명령 실행 (빌드, 테스트, Git 등)</li>
+              <li><strong>Glob/Grep</strong> — 파일 검색, 코드 내 패턴 검색</li>
+              <li><strong>Agent (서브에이전트)</strong> — 복잡한 작업을 병렬로 위임</li>
+            </ul>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-7"><div class="learn-label"><strong>코드베이스 탐색 실습</strong><span class="desc">"이 프로젝트 구조를 설명해줘" 시도</span></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-8"><div class="learn-label"><strong>버그 수정 워크플로우 실습</strong><span class="desc">에러 메시지를 Claude에 공유하고 수정 요청</span></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-9"><div class="learn-label"><strong>테스트 작성 자동화 실습</strong><span class="desc">"auth 모듈의 테스트를 작성하고 실행해" 시도</span></div></div>
+        </div>
+      </div>
+
+      <!-- 모듈 4: 컨텍스트 관리 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 4: 컨텍스트 관리 전략</strong>
+        </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>효과적인 컨텍스트 관리</h4>
+            <ul>
+              <li><strong>Plan Mode</strong> — Shift+Tab으로 전환. 읽기 전용으로 코드를 분석하고 계획만 세움</li>
+              <li><strong>Git Worktree</strong> — <code>claude --worktree feature-auth</code>로 격리된 작업 환경 생성</li>
+              <li><strong>병렬 세션</strong> — 여러 worktree에서 동시에 작업</li>
+              <li><strong>세션 저장</strong> — /rename으로 이름 짓고, --resume으로 복원</li>
+            </ul>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-10"><div class="learn-label"><strong>Plan Mode 사용</strong><span class="desc">Shift+Tab으로 Plan Mode 전환 후 리팩토링 계획 세우기</span></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-11"><div class="learn-label"><strong>Git Worktree로 병렬 작업</strong><span class="desc">두 개의 worktree에서 동시에 작업해보기</span></div></div>
+        </div>
+      </div>
+
+      <!-- 모듈 5: 커스텀 자동화 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 5: 커스텀 자동화 (Skills & Hooks)</strong>
+        </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>자동화 도구</h4>
+            <ul>
+              <li><strong>Skills (커스텀 명령)</strong> — /review-pr, /deploy-staging 같은 재사용 가능한 워크플로우 패키징</li>
+              <li><strong>Hooks</strong> — Claude의 동작 전후에 셸 명령 자동 실행. 예: 파일 편집 후 자동 포맷팅</li>
+              <li><strong>파이프라인 연동</strong> — <code>cat error.log | claude -p "원인 분석"</code> 형태로 Unix 파이프와 연동</li>
+            </ul>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-12"><div class="learn-label"><strong>커스텀 스킬 만들기</strong><span class="desc">.claude/skills/ 에 반복 작업용 스킬 생성</span><a href="https://code.claude.com/docs/en/skills" target="_blank">원문 &rarr;</a></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-13"><div class="learn-label"><strong>Hooks 설정</strong><span class="desc">Notification hook으로 알림 설정해보기</span><a href="https://code.claude.com/docs/en/hooks" target="_blank">원문 &rarr;</a></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-14"><div class="learn-label"><strong>CI/CD 스크립트 연동</strong><span class="desc">claude -p 로 린터/리뷰어 스크립트 만들기</span></div></div>
+        </div>
+      </div>
+
+      <!-- 모듈 6: MCP 서버 연동 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 6: MCP 서버 연동</strong>
+        </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>MCP로 Claude Code 확장</h4>
+            <p>MCP(Model Context Protocol)를 통해 Claude Code가 외부 도구와 데이터에 접근합니다. Google Drive의 디자인 문서, Jira 티켓, Slack 메시지 등을 읽고 조작할 수 있습니다.</p>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-15"><div class="learn-label"><strong>MCP 서버 설정</strong><span class="desc">Claude Code에서 MCP 서버 연결하기</span><a href="https://code.claude.com/docs/en/mcp" target="_blank">원문 &rarr;</a></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-16"><div class="learn-label"><strong>MCP 리소스 참조 실습</strong><span class="desc">@server:resource 형태로 외부 데이터 사용</span></div></div>
+        </div>
+      </div>
+
+      <!-- 모듈 7: GitHub 워크플로우 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 7: GitHub 워크플로우</strong>
+        </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>Git + GitHub 자동화</h4>
+            <ul>
+              <li><strong>커밋 & PR 생성</strong> — "내 변경사항을 커밋하고 PR 만들어" 한마디로 끝</li>
+              <li><strong>코드 리뷰 자동화</strong> — GitHub Actions로 PR마다 자동 리뷰</li>
+              <li><strong>이슈 해결</strong> — <code>claude --from-pr 123</code>으로 PR 관련 세션 재개</li>
+            </ul>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-17"><div class="learn-label"><strong>PR 생성 자동화</strong><span class="desc">"PR 만들어줘" 실습</span></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-18"><div class="learn-label"><strong>GitHub Actions 연동</strong><span class="desc">자동 코드 리뷰 설정</span><a href="https://code.claude.com/docs/en/github-actions" target="_blank">원문 &rarr;</a></div></div>
+        </div>
+      </div>
+
+      <!-- 모듈 8: Thinking 모드 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 8: Thinking & Planning 모드</strong>
+        </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>사고 모드 활용</h4>
+            <ul>
+              <li><strong>Extended Thinking</strong> — 기본 활성화. 복잡한 문제를 단계적으로 추론. Ctrl+O로 사고 과정 확인</li>
+              <li><strong>Adaptive Reasoning</strong> — Opus/Sonnet 4.6에서 effort 수준에 따라 자동 조절</li>
+              <li><strong>ultrathink</strong> — 프롬프트에 "ultrathink" 포함 시 해당 턴만 높은 사고 수준 적용</li>
+              <li><strong>Effort 조절</strong> — /effort 또는 /model에서 low/medium/high/max 설정</li>
+            </ul>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-19"><div class="learn-label"><strong>Thinking 과정 확인</strong><span class="desc">Ctrl+O로 Verbose 모드 켜고 사고 과정 관찰</span></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-20"><div class="learn-label"><strong>Effort 수준 조절</strong><span class="desc">/effort로 다양한 수준 실험해보기</span></div></div>
+        </div>
+      </div>
+
+      <!-- 관련 영상 모음 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>관련 영상 모음</strong>
+        </div>
+        <div class="topic-body">
+          <div class="video-section">
+            <h4>Claude Code Desktop 소개</h4>
+            <div class="video-embed"><iframe src="https://www.youtube.com/embed/zrcCS9oHjtI" title="Claude Code on Desktop" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          </div>
+          <div class="video-section" style="margin-top:16px;">
+            <h4>Claude Code Launch Video</h4>
+            <div class="video-embed"><iframe src="https://www.youtube.com/embed/AJpK3YTTKZ4" title="Claude Code Launch" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          </div>
+          <div class="video-section" style="margin-top:16px;">
+            <h4>Claude Code로 COBOL 코드 현대화 데모</h4>
+            <div class="video-embed"><iframe src="https://www.youtube.com/embed/OwMu0pyYZBc" title="Claude Code COBOL Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          </div>
+          <div class="video-section" style="margin-top:16px;">
+            <h4>Agent Skills 설명</h4>
+            <div class="video-embed"><iframe src="https://www.youtube.com/embed/fOxC44g8vig" title="Agent Skills Explained" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cc-21"><div class="learn-label"><strong>영상 4개 모두 시청</strong><span class="desc">Desktop, Launch, COBOL 데모, Agent Skills</span></div></div>
+        </div>
+      </div>
+
+      <!-- 실전 과제 -->
+      <div class="content-block" style="background: linear-gradient(135deg, #fef9f0, #fdf3e7); border: 1px solid #f0d9c0;">
+        <h4>실전 과제</h4>
+        <div class="learn-item"><input type="checkbox" data-id="course-cc-22"><div class="learn-label"><strong>과제 1: 코드베이스 탐색</strong><span class="desc">새 프로젝트에서 "이 프로젝트 구조를 설명해줘" → "인증 흐름을 추적해줘" 순서로 실습</span></div></div>
+        <div class="learn-item"><input type="checkbox" data-id="course-cc-23"><div class="learn-label"><strong>과제 2: 기능 구현 + PR</strong><span class="desc">간단한 기능을 구현하고 "커밋하고 PR 만들어줘"까지 완료</span></div></div>
+        <div class="learn-item"><input type="checkbox" data-id="course-cc-24"><div class="learn-label"><strong>과제 3: 자동화 구축</strong><span class="desc">커스텀 스킬 1개 + Hook 1개를 만들어서 워크플로우 자동화</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== 강좌: Claude Cowork ===================== -->
+  <div class="section open" id="course-cowork" data-path="overview">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-title"><span class="emoji">🤝</span> Introduction to Claude Cowork — 전체 학습</div>
+      <div class="section-meta">
+        <span class="section-count" data-section="course-cw">0/18</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="section-body">
+
+      <!-- 모듈 1: Cowork란 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 1: Cowork란?</strong>
+        </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>Claude Cowork 개요</h4>
+            <p>Cowork는 Claude가 사용자의 실제 파일, 폴더, 앱에서 직접 작업하는 기능입니다. 코드뿐 아니라 <strong>슬라이드, 스프레드시트, 계약서, 문서</strong> 등 일반 업무 파일을 읽고, 편집하고, 실제 결과물을 만들어냅니다.</p>
+            <ul>
+              <li>개발자가 아닌 일반 직장인도 사용 가능</li>
+              <li>브라우저에서 직접 작업 수행</li>
+              <li>멀티스텝 태스크를 자율적으로 처리</li>
+            </ul>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-1"><div class="learn-label"><strong>Cowork 개념 이해</strong><span class="desc">Cowork가 무엇이고 기존 Claude와 어떻게 다른지</span></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-2"><div class="learn-label"><strong>Cowork 시작하기</strong><span class="desc">claude.ai에서 Cowork 모드 진입</span><a href="https://claude.ai" target="_blank">claude.ai &rarr;</a></div></div>
+        </div>
+      </div>
+
+      <!-- 모듈 2: 태스크 루프 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 2: Cowork 태스크 루프</strong>
+        </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>태스크 루프 이해</h4>
+            <p>Cowork는 사용자의 지시를 받아 계획 → 실행 → 검증의 루프를 반복합니다. 중간에 확인이 필요하면 멈추고 물어봅니다.</p>
+            <ul>
+              <li><strong>계획</strong> — 작업을 분석하고 단계별 계획 수립</li>
+              <li><strong>실행</strong> — 파일 읽기/편집, 웹 검색, 도구 사용 등</li>
+              <li><strong>검증</strong> — 결과를 확인하고 필요시 수정</li>
+              <li><strong>체크포인트</strong> — 중요 지점에서 사용자 확인 요청</li>
+            </ul>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-3"><div class="learn-label"><strong>간단한 태스크 실행</strong><span class="desc">"이 문서를 요약해줘" 같은 단일 작업 시도</span></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-4"><div class="learn-label"><strong>멀티스텝 태스크 실행</strong><span class="desc">여러 단계가 필요한 작업을 지시하고 루프 관찰</span></div></div>
+        </div>
+      </div>
+
+      <!-- 모듈 3: 파일 워크플로우 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 3: 파일 & 문서 워크플로우</strong>
+        </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>실제 파일로 작업하기</h4>
+            <p>Cowork는 다양한 형식의 파일을 직접 다룹니다:</p>
+            <ul>
+              <li><strong>프레젠테이션</strong> — 슬라이드 생성/편집</li>
+              <li><strong>스프레드시트</strong> — 데이터 분석, 차트 생성</li>
+              <li><strong>문서</strong> — 보고서, 제안서, 계약서 작성/편집</li>
+              <li><strong>코드</strong> — 웹앱, 스크립트, 데이터 파이프라인</li>
+            </ul>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-5"><div class="learn-label"><strong>문서 작업 실습</strong><span class="desc">보고서나 제안서를 Cowork로 작성해보기</span></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-6"><div class="learn-label"><strong>프레젠테이션 실습</strong><span class="desc">슬라이드 생성 또는 기존 슬라이드 수정</span></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-7"><div class="learn-label"><strong>데이터 분석 실습</strong><span class="desc">스프레드시트 데이터를 분석하고 시각화</span></div></div>
+        </div>
+      </div>
+
+      <!-- 모듈 4: 리서치 워크플로우 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 4: 리서치 워크플로우</strong>
+        </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>검색 + 분석 + 정리</h4>
+            <p>Cowork의 리서치 기능은 여러 소스를 검색하고 종합적인 인사이트를 제공합니다. Google Workspace 연동으로 내부 문서도 검색 가능합니다.</p>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-8"><div class="learn-label"><strong>리서치 기능 사용</strong><span class="desc">주제를 정해 리서치 요청하고 결과 확인</span><a href="https://support.anthropic.com/en/articles/11106443-using-research" target="_blank">원문 &rarr;</a></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-9"><div class="learn-label"><strong>Google Workspace 연동</strong><span class="desc">Google Docs/Drive와 연결하여 내부 문서 검색</span><a href="https://support.anthropic.com/en/articles/11101545-using-research-and-google-workspace" target="_blank">원문 &rarr;</a></div></div>
+        </div>
+      </div>
+
+      <!-- 모듈 5: 플러그인 & 스킬 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 5: 플러그인 & 스킬</strong>
+        </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>기능 확장하기</h4>
+            <ul>
+              <li><strong>스킬</strong> — 반복 작업을 위한 상세 지침 저장. 커스텀 스킬을 만들어 팀과 공유 가능</li>
+              <li><strong>도구 연동</strong> — GitHub, Google Docs, 분석 도구 등 외부 서비스 연결</li>
+            </ul>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-10"><div class="learn-label"><strong>스킬 사용해보기</strong><span class="desc">기본 제공 스킬 탐색 및 사용</span><a href="https://support.claude.com/en/articles/12512180-using-skills-in-claude" target="_blank">원문 &rarr;</a></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-11"><div class="learn-label"><strong>커스텀 스킬 만들기</strong><span class="desc">자신만의 스킬 생성</span><a href="https://support.claude.com/en/articles/12512198-creating-custom-skills" target="_blank">원문 &rarr;</a></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-12"><div class="learn-label"><strong>도구 연동 설정</strong><span class="desc">GitHub 또는 Google Docs 연결</span><a href="https://support.anthropic.com/en/articles/11817150-connect-your-tools-to-unlock-a-smarter-more-capable-ai-companion" target="_blank">원문 &rarr;</a></div></div>
+        </div>
+      </div>
+
+      <!-- 모듈 6: 멀티스텝 제어 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>모듈 6: 멀티스텝 작업 제어</strong>
+        </div>
+        <div class="topic-body">
+          <div class="content-block">
+            <h4>복잡한 작업을 안전하게 처리</h4>
+            <p>Cowork는 복잡한 멀티스텝 작업도 자율적으로 처리하지만, 중요한 지점에서 사용자 확인을 받습니다. 효과적인 지시 방법을 익히세요.</p>
+            <ul>
+              <li>명확한 성공 기준을 정의하세요</li>
+              <li>단계별로 확인할 체크포인트를 지정하세요</li>
+              <li>결과를 어떻게 처리할지 미리 알려주세요</li>
+            </ul>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-13"><div class="learn-label"><strong>복잡한 작업 지시 실습</strong><span class="desc">여러 단계가 필요한 업무를 한 번에 지시</span></div></div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-14"><div class="learn-label"><strong>작업 결과 검증 및 수정</strong><span class="desc">결과물을 확인하고 피드백으로 개선 요청</span></div></div>
+        </div>
+      </div>
+
+      <!-- 관련 영상 모음 -->
+      <div class="topic">
+        <div class="topic-header" onclick="this.closest('.topic').classList.toggle('open')">
+          <strong>관련 영상 모음</strong>
+        </div>
+        <div class="topic-body">
+          <div class="video-section">
+            <h4>Cowork 공식 소개 영상</h4>
+            <div class="video-embed"><iframe src="https://www.youtube.com/embed/UAmKyyZ-b9E" title="Introducing Cowork" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          </div>
+          <div class="video-section" style="margin-top:16px;">
+            <h4>슬라이드, 스프레드시트, 계약서 작업 데모</h4>
+            <div class="video-embed"><iframe src="https://www.youtube.com/embed/LpGpwhORWr0" title="Claude works with slides" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          </div>
+          <div class="video-section" style="margin-top:16px;">
+            <h4>Cowork 디자인 리드 튜토리얼 (40분)</h4>
+            <div class="video-embed"><iframe src="https://www.youtube.com/embed/rlIy7b-3DC8" title="Cowork Tutorial by Jenny Wen" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          </div>
+          <div class="video-section" style="margin-top:16px;">
+            <h4>브라우저에서 Claude가 작업하는 모습</h4>
+            <div class="video-embed"><iframe src="https://www.youtube.com/embed/rBJnWMD0Pho" title="Let Claude handle work in your browser" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
+          </div>
+          <div class="learn-item"><input type="checkbox" data-id="course-cw-15"><div class="learn-label"><strong>영상 4개 모두 시청</strong><span class="desc">Cowork 소개, 문서 작업 데모, 튜토리얼 40분, 브라우저 데모</span></div></div>
+        </div>
+      </div>
+
+      <!-- 실전 과제 -->
+      <div class="content-block" style="background: linear-gradient(135deg, #f0f5ff, #eef3fb); border: 1px solid #c4d8f0;">
+        <h4>실전 과제</h4>
+        <div class="learn-item"><input type="checkbox" data-id="course-cw-16"><div class="learn-label"><strong>과제 1: 문서 작업</strong><span class="desc">실제 업무 문서(보고서, 제안서 등)를 Cowork로 작성하거나 개선</span></div></div>
+        <div class="learn-item"><input type="checkbox" data-id="course-cw-17"><div class="learn-label"><strong>과제 2: 리서치 + 정리</strong><span class="desc">주제를 정해 리서치하고 결과를 문서로 정리</span></div></div>
+        <div class="learn-item"><input type="checkbox" data-id="course-cw-18"><div class="learn-label"><strong>과제 3: 멀티스텝 자동화</strong><span class="desc">3단계 이상의 복잡한 작업을 한 번에 지시하고 완료</span></div></div>
       </div>
     </div>
   </div>
