@@ -305,9 +305,104 @@ body {
 
 .learn-item.checked .learn-label { color: var(--text-light); text-decoration: line-through; }
 
+.learn-item-wrap { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+.learn-item-top { display: flex; gap: 10px; align-items: flex-start; }
+
 .learn-label { flex: 1; }
 .learn-label strong { font-weight: 600; color: var(--text); }
 .learn-label .desc { display: block; color: var(--text-secondary); font-size: 0.88rem; margin-top: 2px; }
+
+/* === MEMO === */
+.memo-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  cursor: pointer;
+  white-space: nowrap;
+  margin-top: 2px;
+  transition: all 0.2s;
+}
+.memo-toggle:hover { border-color: var(--primary); color: var(--primary); }
+.memo-toggle.has-memo { background: #fff8e1; border-color: #ffc107; color: #e65100; }
+
+.memo-area {
+  display: none;
+  margin-top: 8px;
+}
+.memo-area.open { display: block; }
+
+.memo-area textarea {
+  width: 100%;
+  min-height: 80px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  resize: vertical;
+  color: var(--text);
+  background: #fefefe;
+  transition: border-color 0.2s;
+}
+.memo-area textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: white;
+}
+.memo-area textarea::placeholder { color: var(--text-light); }
+
+/* === AUTH & SYNC === */
+.auth-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-btn {
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: white;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.auth-btn:hover { background: rgba(255,255,255,0.28); }
+
+.auth-btn img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+}
+
+.sync-status {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sync-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.sync-dot.synced { background: #4CAF50; }
+.sync-dot.syncing { background: #ffc107; animation: pulse 1s infinite; }
+.sync-dot.error { background: #f44336; }
+
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
 
 .learn-label a {
   color: var(--primary);
@@ -643,6 +738,7 @@ body {
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
   .header-top { flex-direction: column; gap: 8px; text-align: center; }
+  .header-right { flex-direction: column; align-items: center; gap: 6px; }
   .nav-tabs { overflow-x: auto; padding: 0 12px; }
   .nav-tab { padding: 8px 14px; font-size: 0.82rem; }
   .main-content { padding: 16px; }
@@ -652,6 +748,7 @@ body {
   .recommend-steps { flex-direction: column; }
   .section-header { padding: 14px 16px; }
   .section-title { font-size: 0.95rem; }
+  .learn-item { flex-wrap: wrap; }
 }
 </style>
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -663,10 +760,21 @@ body {
 <header class="site-header">
   <div class="header-top">
     <h1>Anthropic Academy <span>한국어 학습 가이드</span></h1>
-    <div class="progress-summary">
-      <span class="progress-text" id="globalProgressText">0 / 0</span>
-      <div class="progress-bar-container">
-        <div class="progress-bar-fill" id="globalProgressBar" style="width:0%"></div>
+    <div class="header-right" style="display:flex;align-items:center;gap:14px;">
+      <div class="progress-summary">
+        <span class="progress-text" id="globalProgressText">0 / 0</span>
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="globalProgressBar" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="auth-area">
+        <div class="sync-status" id="syncStatus" style="display:none;">
+          <span class="sync-dot" id="syncDot"></span>
+          <span id="syncText"></span>
+        </div>
+        <button class="auth-btn" id="authBtn" onclick="handleAuthClick()">
+          <span id="authLabel">Google 로그인</span>
+        </button>
       </div>
     </div>
   </div>
@@ -1742,9 +1850,32 @@ claude</pre>
 <button class="reset-btn" onclick="resetProgress()">초기화</button>
 <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+
 <script>
+// === Firebase Config ===
+const firebaseConfig = {
+  apiKey: "AIzaSyDnPDS9_Gp6WC7lLrbYQTIh2z185qjJeSM",
+  authDomain: "anthropic-academy-d75c7.firebaseapp.com",
+  projectId: "anthropic-academy-d75c7",
+  storageBucket: "anthropic-academy-d75c7.firebasestorage.app",
+  messagingSenderId: "863358874792",
+  appId: "1:863358874792:web:94e0395b9600a75cfcbe9d"
+};
+
+let db, auth, currentUser = null;
+try {
+  firebase.initializeApp(firebaseConfig);
+  auth = firebase.auth();
+  db = firebase.firestore();
+} catch (e) { console.warn('Firebase init failed:', e); }
+
 // === State ===
 const STORAGE_KEY = 'anthropic-academy-progress';
+const MEMO_KEY = 'anthropic-academy-memos';
 
 function loadProgress() {
   try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch { return {}; }
@@ -1752,6 +1883,73 @@ function loadProgress() {
 
 function saveProgress(progress) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  debouncedSync();
+}
+
+function loadMemos() {
+  try { return JSON.parse(localStorage.getItem(MEMO_KEY)) || {}; } catch { return {}; }
+}
+
+function saveMemos(memos) {
+  localStorage.setItem(MEMO_KEY, JSON.stringify(memos));
+  debouncedSync();
+}
+
+// === Memo Feature ===
+function initMemos() {
+  const memos = loadMemos();
+  document.querySelectorAll('.learn-item').forEach(item => {
+    const cb = item.querySelector('input[type="checkbox"]');
+    if (!cb) return;
+    const id = cb.dataset.id;
+
+    // Wrap existing content
+    const wrap = document.createElement('div');
+    wrap.className = 'learn-item-wrap';
+
+    const top = document.createElement('div');
+    top.className = 'learn-item-top';
+
+    const label = item.querySelector('.learn-label');
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'memo-toggle' + (memos[id] ? ' has-memo' : '');
+    toggleBtn.textContent = memos[id] ? '메모 ✎' : '메모';
+    toggleBtn.onclick = (e) => {
+      e.stopPropagation();
+      const area = item.querySelector('.memo-area');
+      area.classList.toggle('open');
+      if (area.classList.contains('open')) area.querySelector('textarea').focus();
+    };
+
+    top.appendChild(label);
+    top.appendChild(toggleBtn);
+
+    const memoArea = document.createElement('div');
+    memoArea.className = 'memo-area';
+    const textarea = document.createElement('textarea');
+    textarea.placeholder = '학습 메모, 느낀 점, 핵심 정리 등을 기록하세요...';
+    textarea.value = memos[id] || '';
+    textarea.addEventListener('input', () => {
+      const m = loadMemos();
+      if (textarea.value.trim()) {
+        m[id] = textarea.value;
+        toggleBtn.classList.add('has-memo');
+        toggleBtn.textContent = '메모 ✎';
+      } else {
+        delete m[id];
+        toggleBtn.classList.remove('has-memo');
+        toggleBtn.textContent = '메모';
+      }
+      saveMemos(m);
+    });
+    memoArea.appendChild(textarea);
+
+    wrap.appendChild(top);
+    wrap.appendChild(memoArea);
+
+    // Replace learn-item inner content (keep checkbox outside wrap)
+    item.appendChild(wrap);
+  });
 }
 
 // === Init checkboxes ===
@@ -1871,13 +2069,178 @@ document.querySelectorAll('.topic-header').forEach(h => {
 
 // === Reset ===
 function resetProgress() {
-  if (!confirm('모든 학습 진행 상황을 초기화할까요?')) return;
+  if (!confirm('모든 학습 진행 상황과 메모를 초기화할까요?')) return;
   localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(MEMO_KEY);
   document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
     cb.checked = false;
     cb.closest('.learn-item')?.classList.remove('checked');
   });
+  document.querySelectorAll('.memo-area textarea').forEach(ta => { ta.value = ''; });
+  document.querySelectorAll('.memo-toggle').forEach(btn => {
+    btn.classList.remove('has-memo');
+    btn.textContent = '메모';
+  });
   updateAllProgress();
+  if (currentUser) syncToCloud();
+}
+
+// === Auth ===
+function handleAuthClick() {
+  if (currentUser) {
+    if (confirm(`${currentUser.displayName} 로그아웃할까요?`)) {
+      auth.signOut();
+    }
+  } else {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider).catch(err => {
+      if (err.code === 'auth/popup-blocked') {
+        auth.signInWithRedirect(provider);
+      } else {
+        console.error('Auth error:', err);
+      }
+    });
+  }
+}
+
+function updateAuthUI() {
+  const btn = document.getElementById('authBtn');
+  const label = document.getElementById('authLabel');
+  if (currentUser) {
+    label.textContent = currentUser.displayName || '로그아웃';
+    if (currentUser.photoURL) {
+      const existing = btn.querySelector('img');
+      if (existing) existing.remove();
+      const img = document.createElement('img');
+      img.src = currentUser.photoURL;
+      img.alt = '';
+      btn.prepend(img);
+    }
+  } else {
+    label.textContent = 'Google 로그인';
+    const img = btn.querySelector('img');
+    if (img) img.remove();
+    document.getElementById('syncStatus').style.display = 'none';
+  }
+}
+
+// === Sync ===
+let syncTimer = null;
+
+function debouncedSync() {
+  if (!currentUser || !db) return;
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(() => syncToCloud(), 3000);
+}
+
+function setSyncStatus(status, text) {
+  const el = document.getElementById('syncStatus');
+  const dot = document.getElementById('syncDot');
+  const txt = document.getElementById('syncText');
+  el.style.display = 'flex';
+  dot.className = 'sync-dot ' + status;
+  txt.textContent = text || '';
+}
+
+async function syncToCloud() {
+  if (!currentUser || !db) return;
+  setSyncStatus('syncing', '저장 중...');
+  try {
+    const progress = loadProgress();
+    const memos = loadMemos();
+    await db.collection('users').doc(currentUser.uid).set({
+      progress,
+      memos,
+      lastSync: firebase.firestore.FieldValue.serverTimestamp(),
+      displayName: currentUser.displayName || '',
+      email: currentUser.email || ''
+    }, { merge: true });
+    setSyncStatus('synced', '저장됨');
+  } catch (e) {
+    console.error('Sync to cloud failed:', e);
+    setSyncStatus('error', '저장 실패');
+  }
+}
+
+async function syncFromCloud() {
+  if (!currentUser || !db) return;
+  try {
+    const doc = await db.collection('users').doc(currentUser.uid).get();
+    if (doc.exists) {
+      const data = doc.data();
+      return { progress: data.progress || {}, memos: data.memos || {} };
+    }
+  } catch (e) {
+    console.error('Sync from cloud failed:', e);
+  }
+  return null;
+}
+
+function applyData(progress, memos) {
+  // Apply progress
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+  document.querySelectorAll('.learn-item input[type="checkbox"]').forEach(cb => {
+    const id = cb.dataset.id;
+    cb.checked = !!progress[id];
+    cb.closest('.learn-item').classList.toggle('checked', !!progress[id]);
+  });
+  updateAllProgress();
+
+  // Apply memos
+  localStorage.setItem(MEMO_KEY, JSON.stringify(memos));
+  document.querySelectorAll('.learn-item').forEach(item => {
+    const cb = item.querySelector('input[type="checkbox"]');
+    if (!cb) return;
+    const id = cb.dataset.id;
+    const ta = item.querySelector('.memo-area textarea');
+    const btn = item.querySelector('.memo-toggle');
+    if (ta) ta.value = memos[id] || '';
+    if (btn) {
+      btn.classList.toggle('has-memo', !!memos[id]);
+      btn.textContent = memos[id] ? '메모 ✎' : '메모';
+    }
+  });
+}
+
+async function handleFirstSync(cloudData) {
+  const localProgress = loadProgress();
+  const localMemos = loadMemos();
+  const hasLocal = Object.keys(localProgress).length > 0 || Object.keys(localMemos).length > 0;
+  const hasCloud = cloudData && (Object.keys(cloudData.progress).length > 0 || Object.keys(cloudData.memos).length > 0);
+
+  if (hasCloud && hasLocal) {
+    // Both have data — ask user
+    const useCloud = confirm(
+      '클라우드에 저장된 학습 데이터가 있습니다.\n\n' +
+      '[확인] 클라우드 데이터 사용 (이 기기 데이터 덮어쓰기)\n' +
+      '[취소] 이 기기 데이터 유지 (클라우드에 업로드)'
+    );
+    if (useCloud) {
+      applyData(cloudData.progress, cloudData.memos);
+    } else {
+      await syncToCloud();
+    }
+  } else if (hasCloud && !hasLocal) {
+    applyData(cloudData.progress, cloudData.memos);
+    setSyncStatus('synced', '동기화 완료');
+  } else if (!hasCloud && hasLocal) {
+    await syncToCloud();
+  } else {
+    setSyncStatus('synced', '준비');
+  }
+}
+
+// === Auth state listener ===
+if (auth) {
+  auth.onAuthStateChanged(async (user) => {
+    currentUser = user;
+    updateAuthUI();
+    if (user) {
+      setSyncStatus('syncing', '동기화 중...');
+      const cloudData = await syncFromCloud();
+      await handleFirstSync(cloudData);
+    }
+  });
 }
 
 // === Scroll top button ===
@@ -1887,6 +2250,7 @@ window.addEventListener('scroll', () => {
 
 // === Init ===
 initCheckboxes();
+initMemos();
 updateAllProgress();
 </script>
 </body>
