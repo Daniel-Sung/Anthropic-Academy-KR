@@ -486,6 +486,17 @@ body {
   gap: 6px;
 }
 
+.recommend-step {
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.recommend-step:hover {
+  background: #f0ede8;
+  border-color: var(--primary);
+  transform: translateY(-1px);
+}
+
 .recommend-step .step-num {
   background: var(--primary);
   color: white;
@@ -497,6 +508,92 @@ body {
   justify-content: center;
   font-size: 0.75rem;
   font-weight: 700;
+}
+
+/* === FEATURED COURSES === */
+.featured-courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.featured-course {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+
+.featured-course:hover { box-shadow: var(--shadow-hover); }
+
+.featured-course .badge {
+  display: inline-block;
+  background: var(--primary);
+  color: white;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+
+.featured-course .course-info { padding: 20px; }
+.featured-course h3 { font-size: 1.1rem; margin-bottom: 6px; }
+.featured-course p { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.6; margin-bottom: 12px; }
+
+.featured-course .course-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.featured-course .course-tag {
+  background: var(--code-bg);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.featured-course .course-link {
+  display: inline-block;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+}
+
+.featured-course .course-link:hover { text-decoration: underline; }
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  background: #000;
+}
+
+.video-embed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-section {
+  margin: 16px 0;
+}
+
+.video-section h4 {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
 }
 
 /* === SCROLL TOP === */
@@ -589,28 +686,92 @@ body {
     </div>
   </div>
 
+  <!-- 추천 강좌 -->
+  <h2 style="font-size:1.2rem; margin-bottom:16px; color:var(--text);">추천 강좌</h2>
+  <div class="featured-courses">
+    <div class="featured-course">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/zrcCS9oHjtI" title="Claude Code on Desktop" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="course-info">
+        <span class="badge">Featured Course</span>
+        <h3>Claude Code in Action</h3>
+        <p>Claude Code를 개발 워크플로우에 통합하는 실전 과정. AI 코딩 어시스턴트 아키텍처, 도구 활용, 컨텍스트 관리, MCP 서버 연동, GitHub 통합까지 다룹니다.</p>
+        <div class="course-meta">
+          <span class="course-tag">코딩 어시스턴트 아키텍처</span>
+          <span class="course-tag">도구 시스템</span>
+          <span class="course-tag">컨텍스트 관리</span>
+          <span class="course-tag">MCP 서버</span>
+          <span class="course-tag">GitHub 워크플로우</span>
+          <span class="course-tag">Thinking 모드</span>
+        </div>
+        <a class="course-link" href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank">Skilljar에서 수강하기 &rarr;</a>
+
+        <div class="video-section">
+          <h4>관련 영상</h4>
+          <div class="video-embed" style="margin-bottom:8px;">
+            <iframe src="https://www.youtube.com/embed/AJpK3YTTKZ4" title="Claude Code Launch Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/OwMu0pyYZBc" title="Claude Code modernizes a legacy COBOL codebase" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="featured-course">
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/UAmKyyZ-b9E" title="Introducing Cowork" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="course-info">
+        <span class="badge" style="background:var(--path-work);">Featured Course</span>
+        <h3>Introduction to Claude Cowork</h3>
+        <p>실제 파일과 프로젝트에서 Claude와 함께 작업하는 방법을 배우는 과정. Cowork 태스크 루프, 플러그인/스킬, 파일 및 리서치 워크플로우, 멀티스텝 작업 제어 방법을 다룹니다.</p>
+        <div class="course-meta">
+          <span class="course-tag">Cowork 태스크 루프</span>
+          <span class="course-tag">플러그인 & 스킬</span>
+          <span class="course-tag">파일 워크플로우</span>
+          <span class="course-tag">리서치 워크플로우</span>
+          <span class="course-tag">멀티스텝 제어</span>
+        </div>
+        <a class="course-link" href="https://anthropic.skilljar.com/introduction-to-claude-cowork" target="_blank">Skilljar에서 수강하기 &rarr;</a>
+
+        <div class="video-section">
+          <h4>관련 영상</h4>
+          <div class="video-embed" style="margin-bottom:8px;">
+            <iframe src="https://www.youtube.com/embed/LpGpwhORWr0" title="Claude works with you on slides, spreadsheets, and contract redlines" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-embed">
+            <iframe src="https://www.youtube.com/embed/rlIy7b-3DC8" title="Claude Cowork Tutorial from Design Lead" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 추천 학습 순서 -->
   <div class="recommend-box">
     <h3>추천 학습 순서 (개발자)</h3>
     <div class="recommend-steps">
-      <div class="recommend-step"><span class="step-num">1</span> Claude Code 실전</div>
-      <div class="recommend-step"><span class="step-num">2</span> 프롬프트 엔지니어링</div>
-      <div class="recommend-step"><span class="step-num">3</span> Tool Use</div>
-      <div class="recommend-step"><span class="step-num">4</span> MCP</div>
-      <div class="recommend-step"><span class="step-num">5</span> 에이전트 패턴</div>
-      <div class="recommend-step"><span class="step-num">6</span> Extended Thinking</div>
-      <div class="recommend-step"><span class="step-num">7</span> 평가(Evals)</div>
+      <div class="recommend-step" onclick="navigateTo('build','build-code')"><span class="step-num">1</span> Claude Code 실전</div>
+      <div class="recommend-step" onclick="navigateTo('build','build-prompt')"><span class="step-num">2</span> 프롬프트 엔지니어링</div>
+      <div class="recommend-step" onclick="navigateTo('build','build-tools')"><span class="step-num">3</span> Tool Use</div>
+      <div class="recommend-step" onclick="navigateTo('build','build-mcp')"><span class="step-num">4</span> MCP</div>
+      <div class="recommend-step" onclick="navigateTo('build','build-agents')"><span class="step-num">5</span> 에이전트 패턴</div>
+      <div class="recommend-step" onclick="navigateTo('build','build-thinking')"><span class="step-num">6</span> Extended Thinking</div>
+      <div class="recommend-step" onclick="navigateTo('build','build-evals')"><span class="step-num">7</span> 평가(Evals)</div>
     </div>
   </div>
 
   <div class="recommend-box" style="border-color: #c4d8f0; background: linear-gradient(135deg, #f0f5ff, #eef3fb);">
     <h3 style="color: #3a5a9e;">추천 학습 순서 (비개발자)</h3>
     <div class="recommend-steps">
-      <div class="recommend-step"><span class="step-num" style="background:#5B82C4">1</span> Claude 101 기초</div>
-      <div class="recommend-step"><span class="step-num" style="background:#5B82C4">2</span> AI Fluency 과정</div>
-      <div class="recommend-step"><span class="step-num" style="background:#5B82C4">3</span> 부서별 활용 사례</div>
-      <div class="recommend-step"><span class="step-num" style="background:#5B82C4">4</span> 아티팩트 + 프로젝트</div>
-      <div class="recommend-step"><span class="step-num" style="background:#5B82C4">5</span> 스킬 활용</div>
-      <div class="recommend-step"><span class="step-num" style="background:#5B82C4">6</span> 도구 연동</div>
+      <div class="recommend-step" onclick="navigateTo('work','work-start')"><span class="step-num" style="background:#5B82C4">1</span> Claude 101 기초</div>
+      <div class="recommend-step" onclick="navigateTo('personal','personal-fluency')"><span class="step-num" style="background:#5B82C4">2</span> AI Fluency 과정</div>
+      <div class="recommend-step" onclick="navigateTo('work','work-depts')"><span class="step-num" style="background:#5B82C4">3</span> 부서별 활용 사례</div>
+      <div class="recommend-step" onclick="navigateTo('work','work-features')"><span class="step-num" style="background:#5B82C4">4</span> 아티팩트 + 프로젝트</div>
+      <div class="recommend-step" onclick="navigateTo('build','build-skills')"><span class="step-num" style="background:#5B82C4">5</span> 스킬 활용</div>
+      <div class="recommend-step" onclick="navigateTo('work','work-features')"><span class="step-num" style="background:#5B82C4">6</span> 도구 연동</div>
     </div>
   </div>
 </div>
@@ -627,7 +788,7 @@ body {
   </div>
 
   <!-- 1. Claude 4 모델 -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-models">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">🧠</span> Claude 4 시리즈 모델</div>
       <div class="section-meta">
@@ -655,7 +816,7 @@ body {
   </div>
 
   <!-- 2. API & SDK -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-api">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">🔌</span> API & SDK</div>
       <div class="section-meta">
@@ -687,7 +848,7 @@ body {
   </div>
 
   <!-- 3. 프롬프트 엔지니어링 -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-prompt">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">✏️</span> 프롬프트 엔지니어링</div>
       <div class="section-meta">
@@ -719,11 +880,12 @@ body {
       <div class="learn-item"><input type="checkbox" data-id="build-prompt-3"><div class="learn-label"><strong>실전 시나리오 연습</strong><span class="desc">실제 업무 상황에 프롬프트 기법 적용</span><a href="https://github.com/anthropics/courses/blob/master/real_world_prompting/README.md" target="_blank">원문 &rarr;</a></div></div>
       <div class="learn-item"><input type="checkbox" data-id="build-prompt-4"><div class="learn-label"><strong>프롬프트 생성기 사용해보기</strong><span class="desc">Console에서 자동 프롬프트 생성 도구 체험</span><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/prompt-generator" target="_blank">원문 &rarr;</a></div></div>
       <div class="learn-item"><input type="checkbox" data-id="build-prompt-5"><div class="learn-label"><strong>라운드테이블 영상 시청</strong><span class="desc">전문가들의 프롬프트 엔지니어링 토론</span><a href="https://www.youtube.com/watch?v=T9aRN5JkmL8" target="_blank">YouTube &rarr;</a></div></div>
+      <div class="video-embed" style="max-width:560px; margin:8px 0 16px;"><iframe src="https://www.youtube.com/embed/T9aRN5JkmL8" title="Prompt Engineering Roundtable" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
     </div>
   </div>
 
   <!-- 4. 에이전트 -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-agents">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">🤖</span> 에이전트 (Agents)</div>
       <div class="section-meta">
@@ -764,7 +926,7 @@ body {
   </div>
 
   <!-- 5. Tool Use -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-tools">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">🔧</span> Tool Use (도구 사용)</div>
       <div class="section-meta">
@@ -796,6 +958,7 @@ body {
       <div class="learn-item"><input type="checkbox" data-id="build-tools-1"><div class="learn-label"><strong>Tool Use 공식 문서 학습</strong><span class="desc">전체 개념 모델과 작동 원리</span><a href="https://platform.claude.com/docs/en/docs/build-with-claude/tool-use/overview" target="_blank">원문 &rarr;</a></div></div>
       <div class="learn-item"><input type="checkbox" data-id="build-tools-2"><div class="learn-label"><strong>Tool Use 강좌 수강</strong><span class="desc">실습 코드 포함 과정</span><a href="https://github.com/anthropics/courses/blob/master/tool_use/README.md" target="_blank">GitHub &rarr;</a></div></div>
       <div class="learn-item"><input type="checkbox" data-id="build-tools-3"><div class="learn-label"><strong>데모 영상 시청</strong><span class="desc">Tool Use 실제 작동 예시</span><a href="https://www.youtube.com/watch?v=6wkFb2_cUik" target="_blank">YouTube &rarr;</a></div></div>
+      <div class="video-embed" style="max-width:560px; margin:8px 0 16px;"><iframe src="https://www.youtube.com/embed/6wkFb2_cUik" title="Tool Use Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
       <div class="learn-item"><input type="checkbox" data-id="build-tools-4"><div class="learn-label"><strong>Cookbook 예제 실습</strong><span class="desc">다양한 Tool Use 시나리오 코드</span><a href="https://github.com/anthropics/anthropic-cookbook/tree/main/tool_use" target="_blank">GitHub &rarr;</a></div></div>
       <div class="learn-item"><input type="checkbox" data-id="build-tools-5"><div class="learn-label"><strong>Strict Tool Use 적용</strong><span class="desc">스키마 준수를 보장하는 설정</span></div></div>
       <div class="learn-item"><input type="checkbox" data-id="build-tools-6"><div class="learn-label"><strong>병렬 도구 호출 최적화</strong><span class="desc">여러 도구를 동시에 호출하는 방법</span></div></div>
@@ -803,7 +966,7 @@ body {
   </div>
 
   <!-- 6. MCP -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-mcp">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">🔗</span> MCP (Model Context Protocol)</div>
       <div class="section-meta">
@@ -840,7 +1003,7 @@ body {
   </div>
 
   <!-- 7. Claude Code -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-code">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">💻</span> Claude Code</div>
       <div class="section-meta">
@@ -864,7 +1027,7 @@ body {
   </div>
 
   <!-- 8. Skills -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-skills">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">⚡</span> 스킬 (Skills)</div>
       <div class="section-meta">
@@ -885,7 +1048,7 @@ body {
   </div>
 
   <!-- 9. Extended Thinking -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-thinking">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">💭</span> 확장 사고 (Extended Thinking)</div>
       <div class="section-meta">
@@ -913,7 +1076,7 @@ body {
   </div>
 
   <!-- 10. RAG -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-rag">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">🔍</span> RAG (검색 증강 생성)</div>
       <div class="section-meta">
@@ -935,7 +1098,7 @@ body {
   </div>
 
   <!-- 11. Evaluations -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-evals">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">📊</span> 평가 (Evaluations)</div>
       <div class="section-meta">
@@ -955,7 +1118,7 @@ body {
   </div>
 
   <!-- 12. Vision -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-vision">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">👁️</span> 비전 (Vision)</div>
       <div class="section-meta">
@@ -976,7 +1139,7 @@ body {
   </div>
 
   <!-- 13. Computer Use -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-computer">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">🖥️</span> Computer Use</div>
       <div class="section-meta">
@@ -996,7 +1159,7 @@ body {
   </div>
 
   <!-- 14. Prompt Caching -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-caching">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">💾</span> 프롬프트 캐싱</div>
       <div class="section-meta">
@@ -1010,13 +1173,14 @@ body {
         <p>자주 사용하는 시스템 프롬프트나 긴 문서를 캐싱해서 매번 다시 보내지 않아도 되는 기능입니다. 비용 최대 90% 절감, 지연 시간 85% 단축이 가능합니다.</p>
       </div>
       <div class="learn-item"><input type="checkbox" data-id="build-caching-1"><div class="learn-label"><strong>설명 영상 시청</strong><span class="desc">개념 소개 영상</span><a href="https://www.youtube.com/watch?v=h18BezoizkI" target="_blank">YouTube &rarr;</a></div></div>
+      <div class="video-embed" style="max-width:560px; margin:8px 0 16px;"><iframe src="https://www.youtube.com/embed/h18BezoizkI" title="Prompt Caching Explainer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>
       <div class="learn-item"><input type="checkbox" data-id="build-caching-2"><div class="learn-label"><strong>Cookbook 구현 실습</strong><span class="desc">코드로 캐싱 구현</span><a href="https://github.com/anthropics/anthropic-cookbook/blob/main/misc/prompt_caching.ipynb" target="_blank">GitHub &rarr;</a></div></div>
       <div class="learn-item"><input type="checkbox" data-id="build-caching-3"><div class="learn-label"><strong>공식 문서 학습</strong><span class="desc">전체 기술 문서</span><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching" target="_blank">원문 &rarr;</a></div></div>
     </div>
   </div>
 
   <!-- 15. 해커톤 가이드 -->
-  <div class="section" data-path="build">
+  <div class="section" data-path="build" id="section-build-hackathon">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">🏆</span> 해커톤 가이드</div>
       <div class="section-meta">
@@ -1049,7 +1213,7 @@ body {
   </div>
 
   <!-- 시작하기 -->
-  <div class="section" data-path="work">
+  <div class="section" data-path="work" id="section-work-start">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">🚀</span> 처음 시작하기</div>
       <div class="section-meta">
@@ -1065,7 +1229,7 @@ body {
   </div>
 
   <!-- 모델 이해 -->
-  <div class="section" data-path="work">
+  <div class="section" data-path="work" id="section-work-models">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">🧠</span> 최신 모델 활용법</div>
       <div class="section-meta">
@@ -1080,7 +1244,7 @@ body {
   </div>
 
   <!-- 부서별 활용 -->
-  <div class="section" data-path="work">
+  <div class="section" data-path="work" id="section-work-depts">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">🏢</span> 부서별 활용 사례</div>
       <div class="section-meta">
@@ -1098,7 +1262,7 @@ body {
   </div>
 
   <!-- 주요 기능 -->
-  <div class="section" data-path="work">
+  <div class="section" data-path="work" id="section-work-features">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">✨</span> 핵심 기능 익히기</div>
       <div class="section-meta">
@@ -1130,7 +1294,7 @@ body {
   </div>
 
   <!-- 업무용 강좌 -->
-  <div class="section" data-path="work">
+  <div class="section" data-path="work" id="section-work-courses">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">🎓</span> 업무용 강좌</div>
       <div class="section-meta">
@@ -1157,7 +1321,7 @@ body {
   </div>
 
   <!-- AI Fluency -->
-  <div class="section" data-path="personal">
+  <div class="section" data-path="personal" id="section-personal-fluency">
     <div class="section-header" onclick="toggleSection(this)">
       <div class="section-title"><span class="emoji">🎯</span> AI Fluency 4D 프레임워크</div>
       <div class="section-meta">
@@ -1302,6 +1466,23 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
 // === Sections toggle ===
 function toggleSection(header) {
   header.closest('.section').classList.toggle('open');
+}
+
+// === Navigate to section from recommend steps ===
+function navigateTo(tabId, sectionId) {
+  switchTab(tabId);
+  setTimeout(() => {
+    const section = document.getElementById('section-' + sectionId);
+    if (section) {
+      section.classList.add('open');
+      const headerH = document.querySelector('.site-header').offsetHeight || 80;
+      const top = section.getBoundingClientRect().top + window.scrollY - headerH - 12;
+      window.scrollTo({ top, behavior: 'smooth' });
+      section.style.transition = 'box-shadow 0.3s';
+      section.style.boxShadow = '0 0 0 3px var(--primary)';
+      setTimeout(() => { section.style.boxShadow = ''; }, 1500);
+    }
+  }, 100);
 }
 
 // === Topic toggle ===
